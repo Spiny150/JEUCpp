@@ -1,0 +1,14 @@
+#pragma once
+#include <SDL2/SDL.h>
+
+class Input {
+public:
+    static void Update();  // Met à jour les états des entrées
+    static bool isKeyPressed(SDL_Scancode key);  // Vérifie si une touche est pressée
+    static bool isKeyHeld(SDL_Scancode key);  // Vérifie si une touche est pressée
+    static bool isKeyReleased(SDL_Scancode key);  // Vérifie si une touche est relâchée
+
+private:
+    static const Uint8* currentState;  // Etat actuel des touches
+    static Uint8* previousState;  // Etat précédent des touches
+};

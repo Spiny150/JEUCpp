@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/Headers/inc/**",
+                "${workspaceFolder}/Sources/src/**",
+                "${workspaceFolder}/Headers/inc/Game/Player",
+                "${workspaceFolder}/Headers/inc/Engine/Entity",
+                "${workspaceFolder}/Headers/inc/Engine/Entity/Components",
+                "${workspaceFolder}/Headers/inc/Engine"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,57 @@
+#include "entity_visual.h"
+#include <iostream>
+#include "window_manager.h"
+#include "entity.h"
+
+VisualComponent::VisualComponent(Entity& entity) : Component(entity), texture(nullptr), flip(SDL_FLIP_NONE), srcRect(nullptr), fullSrcRect({0, 0, 0, 0}) {
+    transform = entity.getComponent<TransformComponent>();
+    std::cout << "VisualComponent instancié" << std::endl;
+};
+
+VisualComponent::~VisualComponent() {
+    if (texture) {
+        SDL_DestroyTexture(texture);
+        texture = nullptr;
+    }
+    if (srcRect) {
+        delete srcRect;
+        srcRect = nullptr;
+    }
+    std::cout << "VisualComponent détruit" << std::endl;
+}
+
+void VisualComponent::setSprite(const std::string& img_path, WindowManager* WM) {
+    if (!transform) return;
+
+    SDL_Surface* surface = WM->loadSurface(img_path);
+    this->fullSrcRect.w = surface->w;
+    this->fullSrcRect.h = surface->h;
+
+    transform->scale.x = surface->w;
+    transform->scale.y = surface->h;
+
+    this->texture = WM->getTexture(surface);
+    
+
+    SDL_FreeSurface(surface);
+}
+
+void VisualComponent::render(SDL_Renderer* renderer) {
+    if (!transform) return;
+
+    SDL_FRect dstRect = {
+        transform->position.x,
+        transform->position.y,
+        transform->scale.x,
+        transform->scale.y,
+    };
+    SDL_RenderCopyExF(
+        renderer,
+        texture,
+        srcRect,
+        &dstRect,
+        transform->rotation,
+        NULL,
+        flip
+    );
+}
