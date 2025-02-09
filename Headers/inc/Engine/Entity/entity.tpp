@@ -2,7 +2,6 @@
 
 #include "entity.h"
 
-/* Solution ChatGPT mais que je ne comprend pas encore */
 template<typename T, typename... Args>
 T* Entity::addComponent(Args&&... args) {
     auto component = std::make_unique<T>(*this, std::forward<Args>(args)...);
