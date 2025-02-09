@@ -13,7 +13,7 @@ private:
     VisualComponent* visual;
 
 public:
-    Player(Scene* _scene);
+    Player(WindowManager* WM);
     ~Player();
 
     void Start() override;

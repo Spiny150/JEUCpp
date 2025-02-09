@@ -21,8 +21,16 @@ void Scene::Clear() {
     entities.clear();  // Vide le vecteur après suppression
 }
 
+void Scene::setEntityRenderLayer(Entity* entity, int renderLayer) {
+    renderStack.insert({renderLayer, entity});
+}
+
 void Scene::AddEntity(Entity* entity) {
     entities.push_back(entity);
+    entity->setScene(this);
+
+    VisualComponent* visual = entity->getComponent<VisualComponent>();
+    if (visual) visual->setRenderLayer(visual->renderLayer);
 }
 
 void Scene::Start() {
@@ -32,7 +40,6 @@ void Scene::Start() {
 }
 
 void Scene::Update() {
-    SDL_RenderClear(WM->SDLRenderer);
 
     for (Entity* entity : entities) {
         entity->Update();
@@ -46,8 +53,15 @@ void Scene::Update() {
         physics->applyNextPosition();
     }
 
-    for (Entity* entity : entities) {
+    // Render
+    this->Render();
+}
+
+void Scene::Render() {
+    SDL_RenderClear(WM->SDLRenderer);
+    for (const auto& [layer, entity] : renderStack) {
         VisualComponent* visual = entity->getComponent<VisualComponent>();
+        if (!visual) continue;
         visual->render(WM->SDLRenderer);
     }
     SDL_RenderPresent(WM->SDLRenderer);

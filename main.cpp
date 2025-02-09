@@ -25,13 +25,19 @@ int main() {
 
     Scene scene = Scene(WM);
 
-    Entity* player = new Player(&scene);
+    Entity* player = new Player(WM);
+    Entity* player2 = new Player(WM);
 
     scene.AddEntity(player);
+    scene.AddEntity(player2);
 
     scene.Start();
+    player2->getComponent<TransformComponent>()->position.x += 30;
+    std::cout << player2->getComponent<TransformComponent>()->position.x << std::endl;
+    player->getComponent<VisualComponent>()->setRenderLayer(5);
+    player2->getComponent<VisualComponent>()->setRenderLayer(10);
 
-    std::cout << player->getComponent<VisualComponent>()->texture << std::endl;
+    //std::cout << player->getComponent<VisualComponent>()->texture << std::endl;
     bool quit = false;
     while (!quit)
     {

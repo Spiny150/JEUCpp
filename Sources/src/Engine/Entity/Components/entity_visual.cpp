@@ -3,9 +3,15 @@
 #include "window_manager.h"
 #include "entity.h"
 
-VisualComponent::VisualComponent(Entity& entity) : Component(entity), texture(nullptr), flip(SDL_FLIP_NONE), srcRect(nullptr), fullSrcRect({0, 0, 0, 0}) {
-    transform = entity.getComponent<TransformComponent>();
-    std::cout << "VisualComponent instancié" << std::endl;
+VisualComponent::VisualComponent(Entity& entity) :
+    Component(entity),
+    renderLayer(0),
+    texture(nullptr),
+    flip(SDL_FLIP_NONE),
+    srcRect(nullptr),
+    fullSrcRect({0, 0, 0, 0}) {
+        transform = entity.getComponent<TransformComponent>();
+        std::cout << "VisualComponent instancié" << std::endl;
 };
 
 VisualComponent::~VisualComponent() {
@@ -18,6 +24,10 @@ VisualComponent::~VisualComponent() {
         srcRect = nullptr;
     }
     std::cout << "VisualComponent détruit" << std::endl;
+}
+
+void VisualComponent::setRenderLayer(int renderLayer) {
+    this->entity.getScene()->setEntityRenderLayer(&this->entity, renderLayer);
 }
 
 void VisualComponent::setSprite(const std::string& img_path, WindowManager* WM) {

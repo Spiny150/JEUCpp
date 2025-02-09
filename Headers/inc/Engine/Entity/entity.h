@@ -21,7 +21,7 @@ protected:
 
 public:
 
-    Entity(Scene* _scene);
+    Entity();
     virtual ~Entity();
 
     template<typename T, typename... Args>
@@ -29,6 +29,9 @@ public:
 
     template<typename T>
     T* getComponent();
+
+    Scene* getScene();
+    void setScene(Scene*);
 
     virtual void Start() {};
     virtual void Update() {};

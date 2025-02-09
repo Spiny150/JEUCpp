@@ -2,12 +2,12 @@
 #include "Engine/time.hpp"
 #include "inputs.h"
 
-Player::Player(Scene* _scene) : Entity(_scene) {
+Player::Player(WindowManager* WM) : Entity() {
     transform = addComponent<TransformComponent>();
     physics = addComponent<PhysicsComponent>();
     visual = addComponent<VisualComponent>();
 
-    visual->setSprite("Assets/Player/Duck.png", this->scene->WM);
+    visual->setSprite("Assets/Player/Duck.png", WM);
     std::cout << "Player instancié" << std::endl;
 }
 
