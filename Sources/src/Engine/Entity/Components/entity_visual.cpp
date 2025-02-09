@@ -32,11 +32,9 @@ void VisualComponent::setRenderLayer(int renderLayer) {
 }
 
 void VisualComponent::setSprite(const std::string& img_path, WindowManager* WM) {
-    std::cout << "HERE ?" << std::endl;
     if (!transform) return;
 
     SDL_Surface* surface = WM->loadSurface(img_path);
-    std::cout << "HERE2 ?" << std::endl;
     this->fullSrcRect.w = surface->w;
     this->fullSrcRect.h = surface->h;
 

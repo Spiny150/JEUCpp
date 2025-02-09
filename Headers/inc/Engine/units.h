@@ -30,7 +30,7 @@ struct Vector2Int {
 
     Vector2Int operator+(const Vector2Int& other) const;
     Vector2Int& operator+=(const Vector2Int& other);
-    Vector2Int operator*(const float value) const;
+    Vector2 operator*(const float value) const;
 
     static Vector2Int zero() {
         return {0, 0};

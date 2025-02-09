@@ -18,7 +18,7 @@ Vector2Int Vector2Int::operator+(const Vector2Int& other) const {
     return {this->x + other.x, this->y + other.y};
 }
 
-Vector2Int Vector2Int::operator*(const float value) const {
+Vector2 Vector2Int::operator*(const float value) const {
     return {this->x * value, this->y * value};
 }
 

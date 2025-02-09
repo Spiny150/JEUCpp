@@ -17,7 +17,10 @@ void Scene::Init() {
 }
 
 void Scene::CleanUp() {
-    delete camera;
+    if (camera) {
+        delete camera;
+        camera = nullptr;
+    }
     for (Entity*& entity : this->entities) { // Référence au pointeur pour le modifier
         if (entity) {  // Vérifie que le pointeur est valide
             delete entity;
