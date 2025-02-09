@@ -2,10 +2,13 @@
 #include "entity.h"
 #include "entity_physics.h"
 #include "player.h"
+#include "ground.hpp"
 
 void MainMenuScene::Init() {
     Entity* player = new Player(this->WM);
+    Entity* ground  = new Ground(this->WM);
     this->AddEntity(player);
+    this->AddEntity(ground);
 
     this->Start();
 }

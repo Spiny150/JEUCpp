@@ -8,6 +8,7 @@ Player::Player(WindowManager* WM) : Entity() {
     visual = addComponent<VisualComponent>();
 
     visual->setSprite("Assets/Player/Duck.png", WM);
+
     std::cout << "Player instancié" << std::endl;
 }
 

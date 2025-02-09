@@ -5,11 +5,16 @@
             "includePath": [
                 "${workspaceFolder}/Headers/inc/**",
                 "${workspaceFolder}/Sources/src/**",
-                "${workspaceFolder}/Headers/inc/Game/Player",
+                "${workspaceFolder}/Headers/inc/Game/Elements/Player/**",
+                "${workspaceFolder}/Headers/inc/Game/Elements/**",
+                "${workspaceFolder}/Headers/inc/Game/**",
                 "${workspaceFolder}/Headers/inc/Engine/Entity",
-                "${workspaceFolder}/Headers/inc/Engine/Entity/Components",
+                "${workspaceFolder}/Headers/inc/Engine/Entity/Components/**",
                 "${workspaceFolder}/Headers/inc/Engine",
-                "${workspaceFolder}/Headers/inc/Engine/**"
+                "${workspaceFolder}/Headers/inc/Engine/**",
+                "${workspaceFolder}/Headers/inc/Game/Elements/Player",
+                "${workspaceFolder}/Headers/inc/Engine/Entity/Components",
+                "${workspaceFolder}/Headers/inc/Engine/Scenes"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
