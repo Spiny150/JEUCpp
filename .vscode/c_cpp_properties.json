@@ -8,7 +8,8 @@
                 "${workspaceFolder}/Headers/inc/Game/Player",
                 "${workspaceFolder}/Headers/inc/Engine/Entity",
                 "${workspaceFolder}/Headers/inc/Engine/Entity/Components",
-                "${workspaceFolder}/Headers/inc/Engine"
+                "${workspaceFolder}/Headers/inc/Engine",
+                "${workspaceFolder}/Headers/inc/Engine/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

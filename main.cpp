@@ -7,6 +7,9 @@
 #include <time.h>
 #include "Engine/time.hpp"
 #include "inputs.h"
+#include "scene_manager.hpp"
+#include "game_scene.hpp"
+#include <memory>
 
 int main() {
     //INITIALISATION JEU
@@ -23,21 +26,12 @@ int main() {
         return 1;
     }
 
-    Scene scene = Scene(WM);
+    SceneManager* sceneManager = SceneManager::GetInstance();
 
-    Entity* player = new Player(WM);
-    Entity* player2 = new Player(WM);
+    sceneManager->AddScene(SceneTag::MainMenu, std::make_unique<MainMenuScene>(WM));
 
-    scene.AddEntity(player);
-    scene.AddEntity(player2);
+    sceneManager->SwitchToScene(SceneTag::MainMenu);
 
-    scene.Start();
-    player2->getComponent<TransformComponent>()->position.x += 30;
-    std::cout << player2->getComponent<TransformComponent>()->position.x << std::endl;
-    player->getComponent<VisualComponent>()->setRenderLayer(5);
-    player2->getComponent<VisualComponent>()->setRenderLayer(10);
-
-    //std::cout << player->getComponent<VisualComponent>()->texture << std::endl;
     bool quit = false;
     while (!quit)
     {
@@ -56,10 +50,17 @@ int main() {
                 break;
             }
         }
-        scene.Update();
+        if (Input::isKeyPressed(SDL_SCANCODE_N)) {
+            std::cout << "aaa" << std::endl;
+            SceneManager* SM = SceneManager::GetInstance();
+            SM->SwitchToScene(SceneTag::MainMenu);
+        }
+        sceneManager->Update();
+        sceneManager->Render();
     }
 
-
+    delete sceneManager;
+    sceneManager = nullptr;
     delete WM;
     WM = nullptr;
     return 0;

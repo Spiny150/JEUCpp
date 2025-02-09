@@ -7,11 +7,15 @@ Scene::Scene(WindowManager* _WM) : WM(_WM) {
 }
 
 Scene::~Scene() {
-    this->Clear();
+    this->CleanUp();
     std::cout << "Scene libérée" << std::endl;
 }
 
-void Scene::Clear() {
+void Scene::Init() {
+    // To override
+}
+
+void Scene::CleanUp() {
     for (Entity*& entity : this->entities) { // Référence au pointeur pour le modifier
         if (entity) {  // Vérifie que le pointeur est valide
             delete entity;
@@ -30,7 +34,7 @@ void Scene::AddEntity(Entity* entity) {
     entity->setScene(this);
 
     VisualComponent* visual = entity->getComponent<VisualComponent>();
-    if (visual) visual->setRenderLayer(visual->renderLayer);
+    if (visual) this->setEntityRenderLayer(entity, visual->renderLayer);
 }
 
 void Scene::Start() {
@@ -40,21 +44,7 @@ void Scene::Start() {
 }
 
 void Scene::Update() {
-
-    for (Entity* entity : entities) {
-        entity->Update();
-        PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
-        physics->computeNextPosition();
-    }
-
-    for (Entity* entity : entities) {
-        //Manage collisions
-        PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
-        physics->applyNextPosition();
-    }
-
-    // Render
-    this->Render();
+    // To override
 }
 
 void Scene::Render() {
@@ -65,4 +55,8 @@ void Scene::Render() {
         visual->render(WM->SDLRenderer);
     }
     SDL_RenderPresent(WM->SDLRenderer);
+}
+
+SceneTag Scene::GetTag() {
+    return SceneTag::Undefined;
 }

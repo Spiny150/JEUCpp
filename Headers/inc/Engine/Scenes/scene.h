@@ -2,12 +2,12 @@
 
 #include "window_manager.h"
 #include "entity.h"
-
+#include "scene_manager.hpp"
 #include <vector>
 #include <map>
 
 class Scene {
-private:
+protected:
     std::vector<Entity*> entities;
     std::multimap<int, Entity*> renderStack;    // Ordre de rendu basé sur le layer
 
@@ -16,12 +16,15 @@ public:
     Scene(WindowManager* _WM);
     ~Scene();
 
-    void Clear();
     void AddEntity(Entity* entity);
 
     void setEntityRenderLayer(Entity* entity, int renderLayer);
-
-    void Start();
-    void Update();
     void Render();
+
+    virtual void Start();
+    virtual void Update();
+
+    virtual void Init();
+    virtual void CleanUp();
+    virtual SceneTag GetTag();
 };

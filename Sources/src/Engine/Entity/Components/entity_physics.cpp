@@ -9,6 +9,10 @@ PhysicsComponent::PhysicsComponent(Entity& entity) : Component(entity), nextPosi
     std::cout << "PhysicsComponent instancié" << std::endl;
 };
 
+PhysicsComponent::~PhysicsComponent() {
+    std::cout << "PhysicsComponent destroyed" << std::endl;
+}
+
 void PhysicsComponent::computeNextPosition() {
     nextPosition = transform->position;
     nextPosition += velocity * Time::deltaTime;

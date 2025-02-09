@@ -14,6 +14,7 @@ public:
     float bounciness;
 
     PhysicsComponent(Entity& entity);
+    ~PhysicsComponent();
     void computeNextPosition();
     void applyNextPosition();
 };
