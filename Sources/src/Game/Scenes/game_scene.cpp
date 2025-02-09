@@ -36,6 +36,7 @@ void MainMenuScene::CleanUp() {
         }
     }
     entities.clear();  // Vide le vecteur après suppression
+    renderStack.clear();
     std::cout << "Menu cleaned up" << std::endl;
 }
 
