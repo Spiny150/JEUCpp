@@ -2,6 +2,7 @@
 #include <iostream>
 #include "window_manager.h"
 #include "entity.h"
+#include "exceptions.h"
 
 VisualComponent::VisualComponent(Entity& entity) :
     Component(entity),
@@ -31,9 +32,11 @@ void VisualComponent::setRenderLayer(int renderLayer) {
 }
 
 void VisualComponent::setSprite(const std::string& img_path, WindowManager* WM) {
+    std::cout << "HERE ?" << std::endl;
     if (!transform) return;
 
     SDL_Surface* surface = WM->loadSurface(img_path);
+    std::cout << "HERE2 ?" << std::endl;
     this->fullSrcRect.w = surface->w;
     this->fullSrcRect.h = surface->h;
 
@@ -46,12 +49,18 @@ void VisualComponent::setSprite(const std::string& img_path, WindowManager* WM) 
     SDL_FreeSurface(surface);
 }
 
-void VisualComponent::render(SDL_Renderer* renderer) {
-    if (!transform) return;
+void VisualComponent::render(SDL_Renderer* renderer, Camera* camera) {
+
+    if (!transform) {
+        throw Exception("Visual component missing transform");
+    }
+    if (!camera) {
+        throw Exception("Visual component missing camera");
+    }
 
     SDL_FRect dstRect = {
-        transform->position.x,
-        transform->position.y,
+        transform->position.x - camera->position.x,
+        transform->position.y - camera->position.y,
         transform->scale.x,
         transform->scale.y,
     };

@@ -20,7 +20,7 @@ int main() {
     SDL_Event event;
 
     try {
-        WM = new WindowManager(800, 600, "DuckDuckGame");
+        WM = new WindowManager(Vector2Int(800, 600), "DuckDuckGame");
     } catch(const std::exception& e) {
         std::cerr << e.what() << '\n';
         return 1;
@@ -51,8 +51,8 @@ int main() {
             }
         }
         if (Input::isKeyPressed(SDL_SCANCODE_N)) {
-            std::cout << "aaa" << std::endl;
             SceneManager* SM = SceneManager::GetInstance();
+            std::cout << std::endl;
             SM->SwitchToScene(SceneTag::MainMenu);
         }
         sceneManager->Update();

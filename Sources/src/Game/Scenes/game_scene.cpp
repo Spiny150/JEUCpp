@@ -5,6 +5,9 @@
 #include "ground.hpp"
 
 void MainMenuScene::Init() {
+    this->camera->position = Vector2(30, 30);
+    this->camera->velocity = Vector2(30, 0);
+
     Entity* player = new Player(this->WM);
     Entity* ground  = new Ground(this->WM);
     this->AddEntity(player);
@@ -29,6 +32,7 @@ void MainMenuScene::Update() {
 }
 
 void MainMenuScene::CleanUp() {
+    delete camera;
     for (Entity*& entity : this->entities) { // Référence au pointeur pour le modifier
         if (entity) {  // Vérifie que le pointeur est valide
             delete entity;

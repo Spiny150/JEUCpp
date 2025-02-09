@@ -1,5 +1,4 @@
-#ifndef UNITS_H
-#define UNITS_H
+#pragma once
 
 struct Vector2 {
     float x, y;
@@ -25,5 +24,27 @@ struct Vector2 {
         return {-1, 0};
     };
 };
+struct Vector2Int {
+    int x, y;
+    Vector2Int(int _x = 0, int _y = 0) : x(_x), y(_y) {};
 
-#endif
+    Vector2Int operator+(const Vector2Int& other) const;
+    Vector2Int& operator+=(const Vector2Int& other);
+    Vector2Int operator*(const float value) const;
+
+    static Vector2Int zero() {
+        return {0, 0};
+    };
+    static Vector2Int up() {
+        return {0, -1};
+    };
+    static Vector2Int down() {
+        return {0, 1};
+    };
+    static Vector2Int right() {
+        return {1, 0};
+    };
+    static Vector2Int left() {
+        return {-1, 0};
+    };
+};

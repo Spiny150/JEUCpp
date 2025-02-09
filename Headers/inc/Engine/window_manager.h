@@ -1,6 +1,7 @@
 #ifndef WINDOW_MANAGER_H
 #define WINDOW_MANAGER_H
 
+#include "units.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 
@@ -10,11 +11,12 @@ class WindowManager
 {
 public:
     // Variables
+    Vector2Int windowSize;
     SDL_Window* window;
     SDL_Renderer* SDLRenderer;
 
     // Constructeur / Déconstructeur
-    WindowManager(int width, int height, std::string windowName);
+    WindowManager(Vector2Int windowSize, std::string windowName);
     ~WindowManager();
 
     // Méthodes

@@ -3,7 +3,7 @@
 #include "exceptions.h"
 #include <SDL2/SDL_image.h>
 
-WindowManager::WindowManager(int width, int height, std::string windowName) {
+WindowManager::WindowManager(Vector2Int _windowSize, std::string windowName) : windowSize(_windowSize) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         throw Exception("Erreur SDL_Init: " + std::string(SDL_GetError()));
     }
@@ -13,7 +13,7 @@ WindowManager::WindowManager(int width, int height, std::string windowName) {
         throw Exception("Erreur IMG_Init: " + std::string(SDL_GetError()));
     }
 
-    if (!createWindow(width, height, windowName)) {
+    if (!createWindow(windowSize.x, windowSize.y, windowName)) {
         throw Exception("Erreur SDL_CreateWindow: " + std::string(SDL_GetError()));
     }
 

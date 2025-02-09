@@ -4,6 +4,7 @@
 #include <iostream>
 #include "component.h"
 #include "entity_transform.h"
+#include "camera.hpp"
 
 class WindowManager;
 
@@ -23,5 +24,5 @@ public:
     void setRenderLayer(int renderLayer);
 
     void setSprite(const std::string& img_path, WindowManager* WM);
-    void render(SDL_Renderer* renderer);
+    void render(SDL_Renderer* renderer, Camera* camera);
 };

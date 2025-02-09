@@ -3,6 +3,7 @@
 #include "window_manager.h"
 #include "entity.h"
 #include "scene_manager.hpp"
+#include "camera.hpp"
 #include <vector>
 #include <map>
 
@@ -13,6 +14,7 @@ protected:
 
 public:
     WindowManager* WM;
+    Camera* camera;
     Scene(WindowManager* _WM);
     ~Scene();
 
