@@ -9,6 +9,8 @@ class PhysicsComponent : public Component {
 private:
     TransformComponent* transform;
 public:
+    bool hasCollider;
+    bool isStatic;
     Vector2 nextPosition;
     Vector2 velocity;
     float bounciness;
@@ -17,6 +19,9 @@ public:
     ~PhysicsComponent();
     void computeNextPosition();
     void applyNextPosition();
+
+    SDL_FRect getNextPosFRect();
+    void checkCollision(Entity* other);
 };
 
 #endif

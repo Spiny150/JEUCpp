@@ -7,7 +7,7 @@
 void MainMenuScene::Init() {
 
     this->camera->position = Vector2(30, 30);
-    this->camera->velocity = Vector2(30, 0);
+    this->camera->velocity = Vector2(80, 0);
 
     Entity* player = new Player(this->WM);
     Entity* ground  = new Ground(this->WM);
@@ -23,6 +23,15 @@ void MainMenuScene::Update() {
         entity->Update();
         PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
         physics->computeNextPosition();
+    }
+
+    for (long unsigned int i = 0; i < entities.size(); ++i) {
+        Entity* entityA = entities[i];
+        for (long unsigned int j = i+1; j < entities.size(); ++j) {
+            Entity* entityB = entities[j];
+            PhysicsComponent* PhysicsA = entityA->getComponent<PhysicsComponent>();
+            PhysicsA->checkCollision(entityB);
+        }
     }
 
     for (Entity* entity : entities) {
