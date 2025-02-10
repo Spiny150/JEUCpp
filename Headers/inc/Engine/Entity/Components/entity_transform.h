@@ -1,8 +1,7 @@
-#ifndef ENTITY_TRANSFORM_H
-#define ENTITY_TRANSFORM_H
+#pragma once
 
-//#include "component.h"
 #include "units.h"
+#include <SDL2/SDL.h>
 
 class TransformComponent : public Component {
 public:
@@ -10,7 +9,6 @@ public:
     Vector2 scale; // On-screen size
     float rotation;
 
-    TransformComponent(Entity& entity) : Component(entity), position(Vector2()), scale(Vector2()), rotation(0.0f) {};
+    TransformComponent(Entity& entity);
+    SDL_FRect getFRect();
 };
-
-#endif
