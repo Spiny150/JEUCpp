@@ -1,5 +1,6 @@
 #pragma once
 
+#include "SDL2/SDL.h"
 struct Vector2 {
     float x, y;
     Vector2(float _x = 0.0f, float _y = 0.0f) : x(_x), y(_y) {};
@@ -47,4 +48,11 @@ struct Vector2Int {
     static Vector2Int left() {
         return {-1, 0};
     };
+
+    SDL_Point getSDL_Point() {
+        return {x, y};
+    }
+    SDL_FPoint getSDL_FPoint() {
+        return {(float)x, (float)y};
+    }
 };

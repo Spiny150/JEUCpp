@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL2/SDL.h>
+#include "units.h"
 
 class Input {
 public:
@@ -7,6 +8,9 @@ public:
     static bool isKeyPressed(SDL_Scancode key);  // Vérifie si une touche est pressée
     static bool isKeyHeld(SDL_Scancode key);  // Vérifie si une touche est pressée
     static bool isKeyReleased(SDL_Scancode key);  // Vérifie si une touche est relâchée
+
+    static Vector2Int mousePos;
+    static Uint32 mouseButtons;
 
 private:
     static const Uint8* currentState;  // Etat actuel des touches
