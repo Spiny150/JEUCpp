@@ -7,6 +7,7 @@ Player::Player(WindowManager* WM) : Entity() {
     physics = addComponent<PhysicsComponent>();
     visual = addComponent<VisualComponent>();
 
+    physics->isStatic = false;
     visual->setSprite("Assets/Player/Duck.png", WM);
 
     std::cout << "Player instancié" << std::endl;
@@ -26,5 +27,6 @@ void Player::Update() {
     if (Input::isKeyPressed(SDL_SCANCODE_SPACE)) {
         this->physics->velocity.y = -250;
     }
+    this->physics->velocity.x = this->scene->camera->velocity.x;
 }
 

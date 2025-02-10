@@ -1,3 +1,4 @@
+#include "Engine/time.hpp"
 #include "ground.hpp"
 
 Ground::Ground(WindowManager* WM) : Entity() {
@@ -15,8 +16,13 @@ Ground::~Ground() {
 
 void Ground::Start() {
     this->transform->position = Vector2(0, 540);
+    camera = this->getScene()->camera;
 }
 
 void Ground::Update() {
-
+    //transform->position.x = camera->position.x;
+    //transform->position.y -= -10 * Time::deltaTime;
+    if (transform->position.x + transform->scale.x < camera->position.x) {
+        transform->position.x = camera->position.x + camera->scale.x;
+    }
 }

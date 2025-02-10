@@ -1,5 +1,6 @@
 #pragma once
 
+#include "camera.hpp"
 #include "entity.h"
 #include "entity_transform.h"
 #include "entity_physics.h"
@@ -10,6 +11,8 @@ private:
     TransformComponent* transform;
     PhysicsComponent* physics;
     VisualComponent* visual;
+
+    Camera* camera;
 
 public:
     Ground(WindowManager* WM);

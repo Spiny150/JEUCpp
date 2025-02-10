@@ -7,14 +7,22 @@
 void MainMenuScene::Init() {
 
     this->camera->position = Vector2(30, 30);
-    this->camera->velocity = Vector2(80, 0);
+    this->camera->velocity = Vector2(100, 0);
 
     Entity* player = new Player(this->WM);
     Entity* ground  = new Ground(this->WM);
+    Entity* ground2  = new Ground(this->WM);
+    Entity* ground3  = new Ground(this->WM);
+    
     this->AddEntity(player);
+    this->AddEntity(ground3);
+    this->AddEntity(ground2);
     this->AddEntity(ground);
 
     this->Start();
+    ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
+    ground2->getComponent<TransformComponent>()->position.y += 0;
+    ground3->getComponent<TransformComponent>()->position.y = 80;
 }
 
 void MainMenuScene::Update() {
@@ -25,10 +33,9 @@ void MainMenuScene::Update() {
         physics->computeNextPosition();
     }
 
-    for (long unsigned int i = 0; i < entities.size(); ++i) {
-        Entity* entityA = entities[i];
-        for (long unsigned int j = i+1; j < entities.size(); ++j) {
-            Entity* entityB = entities[j];
+    for (Entity* entityA : entities) {
+        for (Entity* entityB : entities) {
+            if (entityA == entityB) continue;
             PhysicsComponent* PhysicsA = entityA->getComponent<PhysicsComponent>();
             PhysicsA->checkCollision(entityB);
         }
