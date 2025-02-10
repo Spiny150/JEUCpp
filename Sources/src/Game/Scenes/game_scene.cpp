@@ -3,21 +3,25 @@
 #include "entity_physics.h"
 #include "player.h"
 #include "ground.hpp"
+#include "button.hpp"
 
 void MainMenuScene::Init() {
 
-    this->camera->position = Vector2(30, 30);
-    this->camera->velocity = Vector2(100, 0);
+    this->camera->position = Vector2();
+    this->camera->velocity = Vector2();
 
     Entity* player = new Player(this->WM);
     Entity* ground  = new Ground(this->WM);
     Entity* ground2  = new Ground(this->WM);
     Entity* ground3  = new Ground(this->WM);
+
+    Entity* button = new Button(this->WM);
     
     this->AddEntity(player);
     this->AddEntity(ground3);
     this->AddEntity(ground2);
     this->AddEntity(ground);
+    this->AddEntity(button);
 
     this->Start();
     ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
@@ -30,21 +34,21 @@ void MainMenuScene::Update() {
     for (Entity* entity : entities) {
         entity->Update();
         PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
-        physics->computeNextPosition();
+        if (physics) physics->computeNextPosition();
     }
 
     for (Entity* entityA : entities) {
         for (Entity* entityB : entities) {
             if (entityA == entityB) continue;
-            PhysicsComponent* PhysicsA = entityA->getComponent<PhysicsComponent>();
-            PhysicsA->checkCollision(entityB);
+            PhysicsComponent* physicsA = entityA->getComponent<PhysicsComponent>();
+            if (physicsA) physicsA->checkCollision(entityB);
         }
     }
 
     for (Entity* entity : entities) {
         //Manage collisions
         PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
-        physics->applyNextPosition();
+        if (physics) physics->applyNextPosition();
     }
 }
 

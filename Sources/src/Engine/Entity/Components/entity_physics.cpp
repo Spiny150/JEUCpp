@@ -52,7 +52,6 @@ void PhysicsComponent::checkCollision(Entity* other) {
 
 
     SDL_bool isColliding = SDL_HasIntersectionF(&nextRectA, &nextRectB);
-    std::cout << transform->position.y << std::endl;
 
     if (isColliding) {
         TransformComponent* otherTransform = other->getComponent<TransformComponent>();
