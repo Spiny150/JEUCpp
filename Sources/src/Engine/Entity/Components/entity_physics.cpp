@@ -47,22 +47,33 @@ void PhysicsComponent::checkCollision(Entity* other) {
     if (!otherPhysics) return;
     if (!otherPhysics->hasCollider) return;
 
-    Entity* entityA = &entity;
-    Entity* entityB = other;
-    SDL_FRect rectA = getNextPosFRect();
-    SDL_FRect rectB = otherPhysics->getNextPosFRect();
+    SDL_FRect nextRectA = getNextPosFRect();
+    SDL_FRect nextRectB = otherPhysics->getNextPosFRect();
 
 
-    SDL_bool isColliding = SDL_HasIntersectionF(&rectA, &rectB);
+    SDL_bool isColliding = SDL_HasIntersectionF(&nextRectA, &nextRectB);
+    std::cout << transform->position.y << std::endl;
 
     if (isColliding) {
-        TransformComponent* transformA = entityA->getComponent<TransformComponent>();
-        TransformComponent* transformB = entityB->getComponent<TransformComponent>();
+        TransformComponent* otherTransform = other->getComponent<TransformComponent>();
 
-        if (transformA->position.y + transformA->scale.y > transformB->position.y) {
-            this->nextPosition.y = otherPhysics->nextPosition.y - transformA->scale.y;
-            this->velocity.y *= -otherPhysics->bounciness;
+        if ((transform->position.y + transform->scale.y <= otherTransform->position.y) || (transform->position.y >= otherTransform->position.y + otherTransform->scale.y)) {
+            char direction = (transform->position.y + transform->scale.y <= otherTransform->position.y) ? -1 : 1;
+
+            this->velocity.y = -otherPhysics->bounciness * (velocity.y - otherPhysics->velocity.y);
+
+            this->nextPosition.y = (direction == -1) ?
+                otherTransform->position.y - transform->scale.y :
+                otherTransform->position.y + otherTransform->scale.y;
         }
+        if ((transform->position.x + transform->scale.x <= otherTransform->position.x) || (transform->position.x >= otherTransform->position.x + otherTransform->scale.x)) {
+            char direction = (transform->position.x + transform->scale.x <= otherTransform->position.x) ? -1 : 1;
 
+            this->velocity.x = -otherPhysics->bounciness * (velocity.x - otherPhysics->velocity.x);
+
+            this->nextPosition.x = (direction == -1) ?
+                otherTransform->position.x - transform->scale.x :
+                otherTransform->position.x + otherTransform->scale.x;
+        }
     }
 }
