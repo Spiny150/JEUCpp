@@ -2,10 +2,10 @@
 
 #include "scene.h"
 
-class MainMenuScene : public Scene {
+class GameScene : public Scene {
 public:
-    MainMenuScene(WindowManager* WM) : Scene(WM) {};
-    ~MainMenuScene();
+    GameScene(WindowManager* WM) : Scene(WM) {};
+    ~GameScene();
 
     void Init() override;
     void Update() override;

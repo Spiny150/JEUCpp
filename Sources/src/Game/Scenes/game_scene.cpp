@@ -5,7 +5,7 @@
 #include "ground.hpp"
 #include "button.hpp"
 
-void MainMenuScene::Init() {
+void GameScene::Init() {
 
     this->camera->position = Vector2();
     this->camera->velocity = Vector2();
@@ -13,12 +13,10 @@ void MainMenuScene::Init() {
     Entity* player = new Player(this->WM);
     Entity* ground  = new Ground(this->WM);
     Entity* ground2  = new Ground(this->WM);
-    Entity* ground3  = new Ground(this->WM);
 
     Entity* button = new Button(this->WM);
-    
+
     this->AddEntity(player);
-    this->AddEntity(ground3);
     this->AddEntity(ground2);
     this->AddEntity(ground);
     this->AddEntity(button);
@@ -26,10 +24,9 @@ void MainMenuScene::Init() {
     this->Start();
     ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
     ground2->getComponent<TransformComponent>()->position.y += 0;
-    ground3->getComponent<TransformComponent>()->position.y = 80;
 }
 
-void MainMenuScene::Update() {
+void GameScene::Update() {
 
     for (Entity* entity : entities) {
         entity->Update();
@@ -52,7 +49,7 @@ void MainMenuScene::Update() {
     }
 }
 
-void MainMenuScene::CleanUp() {
+void GameScene::CleanUp() {
     for (Entity*& entity : this->entities) { // Référence au pointeur pour le modifier
         if (entity) {  // Vérifie que le pointeur est valide
             delete entity;
@@ -64,6 +61,6 @@ void MainMenuScene::CleanUp() {
     std::cout << "Menu cleaned up" << std::endl;
 }
 
-MainMenuScene::~MainMenuScene() {
-    std::cout << "MainMenuScene destroyed" << std::endl;
+GameScene::~GameScene() {
+    std::cout << "GameScene destroyed" << std::endl;
 }
