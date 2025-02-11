@@ -16,6 +16,8 @@ class SceneManager
 private:
     std::unordered_map<SceneTag, std::unique_ptr<Scene>> scenes;
     Scene* currentScene;
+    SceneTag intendedSceneTag;
+    bool reloadScene;
 
     static SceneManager* instance;
 

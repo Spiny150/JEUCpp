@@ -1,7 +1,11 @@
 #include "scene_manager.hpp"
+#include "assert.h"
 
-SceneManager::SceneManager() : currentScene(nullptr) {
-    std::cout << "SceneManager instanciated" << std::endl;
+SceneManager::SceneManager() :
+    currentScene(nullptr),
+    intendedSceneTag(SceneTag::Undefined),
+    reloadScene(true) {
+        std::cout << "SceneManager instanciated" << std::endl;
 }
 SceneManager::~SceneManager() {
     std::cout << "SceneManager destroyed" << std::endl;
@@ -22,15 +26,25 @@ void SceneManager::AddScene(SceneTag tag, std::unique_ptr<Scene> scene) {
 }
 
 void SceneManager::SwitchToScene(SceneTag tag) {
-    if (currentScene) {
-        currentScene->CleanUp();
-    }
-
-    currentScene = scenes[tag].get();
-    currentScene->Init();
+    intendedSceneTag = tag;
+    reloadScene = true;
 }
 
 void SceneManager::Update() {
+    if (reloadScene) {
+        reloadScene = false;
+        if (currentScene) {
+            currentScene->CleanUp();
+        }
+
+        currentScene = scenes[intendedSceneTag].get();
+
+        assert(currentScene != nullptr);
+        if (currentScene) {
+            currentScene->Init();
+        }
+    }
+
     if (currentScene) {
         currentScene->Update();
     }
