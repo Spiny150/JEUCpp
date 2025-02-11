@@ -1,5 +1,6 @@
 #include "button.hpp"
 #include "inputs.h"
+#include "scene_manager.hpp"
 
 Button::Button(WindowManager* WM) {
     transform = addComponent<TransformComponent>();
@@ -20,11 +21,20 @@ void Button::Update() {
     transform->scale = defaultSize;
     if (SDL_PointInFRect(&mousePos, &buttonRect)) {
         transform->scale = hoverSize;
+        if (Input::isClickPressed()) {
+
+            SceneManager* sceneManager = SceneManager::GetInstance();
+            sceneManager->SwitchToScene(SceneTag::Game);
+        }
+        SDL_Delay(16);
     }
     transform->position = centerPosition + (transform->scale * -0.5);
 }
 
 void Button::Start() {
+    Camera* camera = this->scene->camera;
+    transform->position = camera->position.x + camera->scale.x - transform->scale.x;
+
     defaultSize = {transform->scale.x, transform->scale.y};
     centerPosition = Vector2(
         transform->position.x + defaultSize.x/2,
