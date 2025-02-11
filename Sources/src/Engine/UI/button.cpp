@@ -26,7 +26,6 @@ void Button::Update() {
             SceneManager* sceneManager = SceneManager::GetInstance();
             sceneManager->SwitchToScene(SceneTag::Game);
         }
-        SDL_Delay(16);
     }
     transform->position = centerPosition + (transform->scale * -0.5);
 }
