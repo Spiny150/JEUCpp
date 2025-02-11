@@ -28,9 +28,9 @@ int main() {
 
     SceneManager* sceneManager = SceneManager::GetInstance();
 
-    sceneManager->AddScene(SceneTag::MainMenu, std::make_unique<MainMenuScene>(WM));
+    sceneManager->AddScene(SceneTag::Game, std::make_unique<GameScene>(WM));
 
-    sceneManager->SwitchToScene(SceneTag::MainMenu);
+    sceneManager->SwitchToScene(SceneTag::Game);
 
     bool quit = false;
     while (!quit)
