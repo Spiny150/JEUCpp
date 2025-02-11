@@ -33,6 +33,7 @@ void SceneManager::SwitchToScene(SceneTag tag) {
 void SceneManager::Update() {
     if (reloadScene) {
         reloadScene = false;
+        // Possibilité d'ajouter animation de changement de scene ici
         if (currentScene) {
             currentScene->CleanUp();
         }
