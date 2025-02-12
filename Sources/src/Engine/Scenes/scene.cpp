@@ -55,13 +55,13 @@ void Scene::Update() {
 }
 
 void Scene::Render() {
-    SDL_RenderClear(WM->SDLRenderer);
+    //SDL_RenderClear(WM->SDLRenderer);
     for (const auto& [layer, entity] : renderStack) {
         VisualComponent* visual = entity->getComponent<VisualComponent>();
         if (!visual) continue;
         visual->render(WM->SDLRenderer, this->camera);
     }
-    SDL_RenderPresent(WM->SDLRenderer);
+    //SDL_RenderPresent(WM->SDLRenderer);
     camera->Update();
 }
 

@@ -1,10 +1,13 @@
 #include "scene_manager.hpp"
 #include "assert.h"
+#include "time.hpp"
 
-SceneManager::SceneManager() :
+SceneManager::SceneManager(WindowManager* _WM) :
     currentScene(nullptr),
     intendedSceneTag(SceneTag::Undefined),
-    reloadScene(true) {
+    sceneState(SceneState::SceneSwitch),
+    WM(_WM),
+    transitionRect({0, 0, 0, 0}) {
         std::cout << "SceneManager instanciated" << std::endl;
 }
 SceneManager::~SceneManager() {
@@ -14,10 +17,13 @@ SceneManager::~SceneManager() {
 
 SceneManager* SceneManager::instance = nullptr;  // Définition de l'instance unique
 
+SceneManager* SceneManager::CreateInstance(WindowManager* WM) {
+    assert(!instance);
+    instance = new SceneManager(WM);
+    return instance;
+}
 SceneManager* SceneManager::GetInstance() {
-    if (!instance) {
-        instance = new SceneManager();
-    }
+    assert(instance);
     return instance;
 }
 
@@ -27,13 +33,24 @@ void SceneManager::AddScene(SceneTag tag, std::unique_ptr<Scene> scene) {
 
 void SceneManager::SwitchToScene(SceneTag tag) {
     intendedSceneTag = tag;
-    reloadScene = true;
+    sceneState = SceneState::TransitionOut;
 }
 
 void SceneManager::Update() {
-    if (reloadScene) {
-        reloadScene = false;
-        // Possibilité d'ajouter animation de changement de scene ici
+    //SDL_Delay(50);
+    //printf("%d", sceneState);
+    SDL_RenderClear(WM->SDLRenderer);
+    switch (sceneState)
+    {
+    case SceneState::SceneShown:
+        if (currentScene) {
+            currentScene->Update();
+            currentScene->Render();
+        }
+        break;
+    case SceneState::SceneSwitch:
+        SDL_SetRenderDrawColor(WM->SDLRenderer, 0, 0, 0, 255);
+        SDL_RenderFillRectF(WM->SDLRenderer, &transitionRect);
         if (currentScene) {
             currentScene->CleanUp();
         }
@@ -44,17 +61,48 @@ void SceneManager::Update() {
         if (currentScene) {
             currentScene->Init();
         }
-    }
-
-    if (currentScene) {
-        currentScene->Update();
-    }
-}
-
-void SceneManager::Render() {
-    if (currentScene) {
+        sceneState = SceneState::TransitionIn;
+        break;
+    case SceneState::TransitionOut:
+        if (!currentScene) { // If no scene is currently active, jump to SceneSwitching
+            sceneState = SceneState::SceneSwitch;
+            break;
+        }
         currentScene->Render();
+        transitionRect.x = 0;
+        transitionRect.y = 0;
+        transitionRect.w = 800;
+        transitionRect.h += 1200 * Time::deltaTime;
+
+        SDL_SetRenderDrawColor(WM->SDLRenderer, 0, 0, 0, 255);
+        SDL_RenderFillRectF(WM->SDLRenderer, &transitionRect);
+
+        if (transitionRect.h > 600) {
+            transitionRect.x = 0;
+            transitionRect.y = 0;
+            transitionRect.w = 0;
+            transitionRect.h = 0;
+            sceneState = SceneState::SceneSwitch;
+        }
+        break;
+    case SceneState::TransitionIn:
+        if (currentScene) currentScene->Render();
+        transitionRect.x = 0;
+        transitionRect.y += 1200 * Time::deltaTime;
+        transitionRect.w = 800;
+        transitionRect.h = 600;
+        SDL_SetRenderDrawColor(WM->SDLRenderer, 0, 0, 0, 255);
+        SDL_RenderFillRectF(WM->SDLRenderer, &transitionRect);
+        if (transitionRect.y > 600) {
+            transitionRect.x = 0;
+            transitionRect.y = 0;
+            transitionRect.w = 0;
+            transitionRect.h = 0;
+            sceneState = SceneState::SceneShown;
+        }
+        break;
     }
+    SDL_RenderPresent(WM->SDLRenderer);
 }
 
 void SceneManager::CleanUp() {

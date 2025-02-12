@@ -26,7 +26,7 @@ int main() {
         return 1;
     }
 
-    SceneManager* sceneManager = SceneManager::GetInstance();
+    SceneManager* sceneManager = SceneManager::CreateInstance(WM);
 
     sceneManager->AddScene(SceneTag::Game, std::make_unique<GameScene>(WM));
 
@@ -50,13 +50,7 @@ int main() {
                 break;
             }
         }
-        if (Input::isKeyPressed(SDL_SCANCODE_N)) {
-            SceneManager* SM = SceneManager::GetInstance();
-            std::cout << std::endl;
-            SM->SwitchToScene(SceneTag::MainMenu);
-        }
         sceneManager->Update();
-        sceneManager->Render();
     }
 
     delete sceneManager;

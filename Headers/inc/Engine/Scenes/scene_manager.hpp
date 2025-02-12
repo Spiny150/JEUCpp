@@ -2,6 +2,7 @@
 
 #include <unordered_map>
 #include <memory>
+#include "window_manager.h"
 
 class Scene;
 
@@ -11,20 +12,31 @@ enum class SceneTag {
     Game
 };
 
+enum class SceneState {
+    SceneShown,
+    SceneSwitch,
+    TransitionIn,
+    TransitionOut
+};
+
 class SceneManager
 {
 private:
     std::unordered_map<SceneTag, std::unique_ptr<Scene>> scenes;
     Scene* currentScene;
     SceneTag intendedSceneTag;
-    bool reloadScene;
+    SceneState sceneState;
+
+    WindowManager* WM;
+    SDL_FRect transitionRect;
 
     static SceneManager* instance;
 
 public:
-    SceneManager();
+    SceneManager(WindowManager* _WM);
     ~SceneManager();
 
+    static SceneManager* CreateInstance(WindowManager* WM);
     static SceneManager* GetInstance();
 
     // Ajouter une scène au gestionnaire
@@ -35,9 +47,6 @@ public:
 
     // Mise à jour de la scène actuelle
     void Update();
-
-    // Rendu de la scène actuelle
-    void Render();
 
     // Nettoyage de la scène actuelle
     void CleanUp();
