@@ -1,5 +1,5 @@
-#include "component.h"
-#include "entity_transform.h"
+#include "component.hpp"
+#include "transform_component.hpp"
 
 TransformComponent::TransformComponent(Entity& entity) :
     Component(entity),

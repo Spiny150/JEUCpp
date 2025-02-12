@@ -1,6 +1,6 @@
 #include "game_scene.hpp"
 #include "entity.h"
-#include "entity_physics.h"
+#include "physics_component.hpp"
 #include "player.h"
 #include "ground.hpp"
 #include "button.hpp"

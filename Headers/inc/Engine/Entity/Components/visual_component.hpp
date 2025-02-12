@@ -2,8 +2,8 @@
 
 #include <SDL2/SDL_image.h>
 #include <iostream>
-#include "component.h"
-#include "entity_transform.h"
+#include "component.hpp"
+#include "transform_component.hpp"
 #include "camera.hpp"
 
 class WindowManager;

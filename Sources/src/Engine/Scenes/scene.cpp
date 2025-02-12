@@ -1,6 +1,6 @@
 #include "scene.h"
-#include "entity_physics.h"
-#include "entity_visual.h"
+#include "physics_component.hpp"
+#include "visual_component.hpp"
 
 Scene::Scene(WindowManager* _WM) : WM(_WM) {
     this->camera = new Camera(WM->windowSize);

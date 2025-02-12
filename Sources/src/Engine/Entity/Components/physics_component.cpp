@@ -1,4 +1,4 @@
-#include "entity_physics.h"
+#include "physics_component.hpp"
 #include "Engine/time.hpp"
 #include "iostream"
 #include "entity.h"

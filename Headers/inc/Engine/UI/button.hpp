@@ -1,8 +1,8 @@
 #pragma once
 
 #include "entity.h"
-#include "entity_transform.h"
-#include "entity_visual.h"
+#include "transform_component.hpp"
+#include "visual_component.hpp"
 
 class Button : public Entity
 {

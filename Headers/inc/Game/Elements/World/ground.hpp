@@ -2,9 +2,9 @@
 
 #include "camera.hpp"
 #include "entity.h"
-#include "entity_transform.h"
-#include "entity_physics.h"
-#include "entity_visual.h"
+#include "transform_component.hpp"
+#include "physics_component.hpp"
+#include "visual_component.hpp"
 
 class Ground : public Entity {
 private:

@@ -2,8 +2,8 @@
 #define ENTITY_PHYSICS_H
 
 #include "units.h"
-#include "component.h"
-#include "entity_transform.h"
+#include "component.hpp"
+#include "transform_component.hpp"
 
 class PhysicsComponent : public Component {
 private:

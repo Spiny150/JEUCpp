@@ -3,7 +3,7 @@
 #include "entity.h"
 #include <iostream>
 #include <memory>
-#include "entity_visual.h"
+#include "visual_component.hpp"
 
 
 Entity::Entity() : scene(nullptr) {

@@ -1,4 +1,4 @@
-#include "entity_visual.h"
+#include "visual_component.hpp"
 #include <iostream>
 #include "window_manager.h"
 #include "entity.h"
