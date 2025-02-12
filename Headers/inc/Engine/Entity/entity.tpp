@@ -9,9 +9,19 @@ T* Entity::addComponent(Args&&... args) {
     components[typeid(T)] = std::move(component);
     return ptr;
 }
-
+/*
 template<typename T>
 T* Entity::getComponent() {
     auto it = components.find(typeid(T));
     return (it != components.end()) ? static_cast<T*>(it->second.get()) : nullptr;
+}
+*/
+template<typename T>
+T* Entity::getComponent() {
+    for (auto& [key, component] : components) {
+        if (T* casted = dynamic_cast<T*>(component.get())) {
+            return casted;
+        }
+    }
+    return nullptr;
 }
