@@ -4,6 +4,7 @@
 #include "player.h"
 #include "ground.hpp"
 #include "button.hpp"
+#include "sky.hpp"
 
 void GameScene::Init() {
 
@@ -15,7 +16,9 @@ void GameScene::Init() {
     Entity* ground2  = new Ground(this->WM);
 
     Entity* button = new Button(this->WM);
+    Entity* sky = new Sky(this->WM);
 
+    this->AddEntity(sky);
     this->AddEntity(player);
     this->AddEntity(ground2);
     this->AddEntity(ground);

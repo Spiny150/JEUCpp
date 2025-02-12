@@ -72,7 +72,7 @@ void SceneManager::Update() {
         transitionRect.x = 0;
         transitionRect.y = 0;
         transitionRect.w = 800;
-        transitionRect.h += 1200 * Time::deltaTime;
+        transitionRect.h += 1200 * Time::unscaledDeltaTime;
 
         SDL_SetRenderDrawColor(WM->SDLRenderer, 0, 0, 0, 255);
         SDL_RenderFillRectF(WM->SDLRenderer, &transitionRect);
@@ -88,7 +88,7 @@ void SceneManager::Update() {
     case SceneState::TransitionIn:
         if (currentScene) currentScene->Render();
         transitionRect.x = 0;
-        transitionRect.y += 1200 * Time::deltaTime;
+        transitionRect.y += 1200 * Time::unscaledDeltaTime;
         transitionRect.w = 800;
         transitionRect.h = 600;
         SDL_SetRenderDrawColor(WM->SDLRenderer, 0, 0, 0, 255);
