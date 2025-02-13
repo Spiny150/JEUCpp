@@ -2,12 +2,9 @@
 #include "inputs.h"
 #include "scene_manager.hpp"
 
-Button::Button(WindowManager* WM) {
+Button::Button(WindowManager* WM, Camera* camera) {
     transform = addComponent<TransformComponent>();
-    visual = addComponent<VisualComponent>();
-
-
-    visual->setSprite("Assets/Player/Duck.png", WM);
+    visual = addComponent<ImageVisualComponent>(WM, camera, "Assets/Player/Duck.png");
 }
 
 Button::~Button() {

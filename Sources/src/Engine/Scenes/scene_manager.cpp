@@ -39,6 +39,7 @@ void SceneManager::SwitchToScene(SceneTag tag) {
 void SceneManager::Update() {
     //SDL_Delay(50);
     //printf("%d", sceneState);
+    assert(WM && WM->SDLRenderer);
     SDL_RenderClear(WM->SDLRenderer);
     switch (sceneState)
     {

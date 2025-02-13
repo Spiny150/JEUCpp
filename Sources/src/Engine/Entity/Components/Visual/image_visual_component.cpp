@@ -2,10 +2,12 @@
 #include "exceptions.h"
 #include "assert.h"
 
-ImageVisualComponent::ImageVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& imgPath) : VisualComponent(entity, _WM, camera) {
-
+ImageVisualComponent::ImageVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& imgPath) : VisualComponent(entity, _WM, camera),
+flip(SDL_FLIP_NONE),
+srcRect(nullptr)
+{
     assert(transform);
-    if (transform) return;
+    if (!transform) return;
 
     SDL_Surface* surface = WM->loadSurface(imgPath);
     this->fullSrcRect.w = surface->w;
@@ -18,6 +20,17 @@ ImageVisualComponent::ImageVisualComponent(Entity& entity, WindowManager* _WM, C
     
 
     SDL_FreeSurface(surface);
+}
+
+ImageVisualComponent::~ImageVisualComponent() {
+    if (texture) {
+        SDL_DestroyTexture(texture);
+        texture = nullptr;
+    }
+    if (srcRect) {
+        delete srcRect;
+        srcRect = nullptr;
+    }
 }
 
 void ImageVisualComponent::Render() {
@@ -35,6 +48,10 @@ void ImageVisualComponent::Render() {
         transform->scale.x,
         transform->scale.y,
     };
+    assert(this);
+    assert(WM);
+    assert(WM->SDLRenderer);
+    assert(texture);
     SDL_RenderCopyExF(
         WM->SDLRenderer,
         texture,

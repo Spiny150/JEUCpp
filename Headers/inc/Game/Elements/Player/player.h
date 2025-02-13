@@ -4,16 +4,17 @@
 #include "entity.h"
 #include "transform_component.hpp"
 #include "physics_component.hpp"
-#include "visual_component.hpp"
+#include "image_visual_component.hpp"
+#include "camera.hpp"
 
 class Player : public Entity {
 private:
     TransformComponent* transform;
     PhysicsComponent* physics;
-    VisualComponent* visual;
+    ImageVisualComponent* visual;
 
 public:
-    Player(WindowManager* WM);
+    Player(WindowManager* WM, Camera* camera);
     ~Player();
 
     void Start() override;

@@ -1,6 +1,7 @@
 #include "scene.h"
 #include "physics_component.hpp"
 #include "visual_component.hpp"
+#include "assert.h"
 
 Scene::Scene(WindowManager* _WM) : WM(_WM) {
     this->camera = new Camera(WM->windowSize);
@@ -59,7 +60,7 @@ void Scene::Render() {
     for (const auto& [layer, entity] : renderStack) {
         VisualComponent* visual = entity->getComponent<VisualComponent>();
         if (!visual) continue;
-        visual->render(WM->SDLRenderer, this->camera);
+        visual->Render();
     }
     //SDL_RenderPresent(WM->SDLRenderer);
     camera->Update();

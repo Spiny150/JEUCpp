@@ -4,17 +4,17 @@
 #include "entity.h"
 #include "transform_component.hpp"
 #include "physics_component.hpp"
-#include "visual_component.hpp"
+#include "image_visual_component.hpp"
 
 class Sky : public Entity {
 private:
     TransformComponent* transform;
-    VisualComponent* visual;
+    ImageVisualComponent* visual;
 
     Camera* camera;
 
 public:
-    Sky(WindowManager* WM);
+    Sky(WindowManager* WM, Camera* camera);
     ~Sky();
 
     void Start() override;

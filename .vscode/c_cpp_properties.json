@@ -14,7 +14,8 @@
                 "${workspaceFolder}/Headers/inc/Engine/**",
                 "${workspaceFolder}/Headers/inc/Game/Elements/Player",
                 "${workspaceFolder}/Headers/inc/Engine/Entity/Components",
-                "${workspaceFolder}/Headers/inc/Engine/Scenes"
+                "${workspaceFolder}/Headers/inc/Engine/Scenes",
+                "${workspaceFolder}/Headers/inc/Engine/Entity/Components/Visual"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

@@ -4,18 +4,18 @@
 #include "entity.h"
 #include "transform_component.hpp"
 #include "physics_component.hpp"
-#include "visual_component.hpp"
+#include "image_visual_component.hpp"
 
 class Ground : public Entity {
 private:
     TransformComponent* transform;
     PhysicsComponent* physics;
-    VisualComponent* visual;
+    ImageVisualComponent* visual;
 
     Camera* camera;
 
 public:
-    Ground(WindowManager* WM);
+    Ground(WindowManager* WM, Camera* camera);
     ~Ground();
 
     void Start() override;

@@ -1,11 +1,10 @@
 #include "Engine/time.hpp"
 #include "sky.hpp"
 
-Sky::Sky(WindowManager* WM) : Entity() {
+Sky::Sky(WindowManager* WM, Camera* camera) : Entity() {
     transform = addComponent<TransformComponent>();
-    visual = addComponent<VisualComponent>();
+    visual = addComponent<ImageVisualComponent>(WM, camera, "Assets/World/sky.png");
 
-    visual->setSprite("Assets/World/sky.png", WM);
     std::cout << "Sky instancié" << std::endl;
 }
 

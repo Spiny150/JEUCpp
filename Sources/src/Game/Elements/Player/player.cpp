@@ -1,14 +1,15 @@
 #include "player.h"
 #include "Engine/time.hpp"
 #include "inputs.h"
+#include "assert.h"
 
-Player::Player(WindowManager* WM) : Entity() {
+Player::Player(WindowManager* WM, Camera* camera) : Entity() {
     transform = addComponent<TransformComponent>();
     physics = addComponent<PhysicsComponent>();
-    visual = addComponent<VisualComponent>();
+    assert(WM && camera);
+    visual = addComponent<ImageVisualComponent>(WM, camera, "Assets/Player/Duck.png");
 
     physics->isStatic = false;
-    visual->setSprite("Assets/Player/Duck.png", WM);
 
     std::cout << "Player instancié" << std::endl;
 }

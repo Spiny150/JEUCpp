@@ -1,12 +1,11 @@
 #include "Engine/time.hpp"
 #include "ground.hpp"
 
-Ground::Ground(WindowManager* WM) : Entity() {
+Ground::Ground(WindowManager* WM, Camera* camera) : Entity() {
     transform = addComponent<TransformComponent>();
     physics = addComponent<PhysicsComponent>();
-    visual = addComponent<VisualComponent>();
+    visual = addComponent<ImageVisualComponent>(WM, camera, "Assets/World/ground.png");
 
-    visual->setSprite("Assets/World/floor.png", WM);
     std::cout << "Ground instancié" << std::endl;
 }
 

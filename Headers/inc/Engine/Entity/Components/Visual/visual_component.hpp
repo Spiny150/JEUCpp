@@ -14,8 +14,8 @@ protected:
     TransformComponent* transform;
     WindowManager* WM;
     Camera* camera;
-    int renderLayer;
 public:
+    int renderLayer;
 
     VisualComponent(Entity& entity, WindowManager* _WM, Camera* camera);
     virtual ~VisualComponent() = default;

@@ -12,7 +12,7 @@ private:
 public:
 
     ImageVisualComponent(Entity& entity, WindowManager* WM, Camera* camera, const std::string& imgPath);
-    ~ImageVisualComponent();
+    virtual ~ImageVisualComponent();
 
     void Render() override;
 
