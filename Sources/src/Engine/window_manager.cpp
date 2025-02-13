@@ -2,15 +2,20 @@
 #include "entity.h"
 #include "exceptions.h"
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 WindowManager::WindowManager(Vector2Int _windowSize, std::string windowName) : windowSize(_windowSize) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         throw Exception("Erreur SDL_Init: " + std::string(SDL_GetError()));
     }
 
+    if (TTF_Init() != 0) {
+        throw Exception("Erreur TTF_Init: " + std::string(TTF_GetError()));
+    }
+
     // Initialisation de SDL_image pour charger des images
     if (IMG_Init(IMG_INIT_PNG) == 0) {
-        throw Exception("Erreur IMG_Init: " + std::string(SDL_GetError()));
+        throw Exception("Erreur IMG_Init: " + std::string(IMG_GetError()));
     }
 
     if (!createWindow(windowSize.x, windowSize.y, windowName)) {

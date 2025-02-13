@@ -4,7 +4,7 @@
 
 Button::Button(WindowManager* WM, Camera* camera) {
     transform = addComponent<TransformComponent>();
-    visual = addComponent<ImageVisualComponent>(WM, camera, "Assets/Player/Duck.png");
+    visual = addComponent<ButtonVisualComponent>(WM, camera);
 }
 
 Button::~Button() {
@@ -16,8 +16,11 @@ void Button::Update() {
     SDL_FRect buttonRect = transform->getFRect();
 
     transform->scale = defaultSize;
-    if (SDL_PointInFRect(&mousePos, &buttonRect)) {
+    bool isHovered = SDL_PointInFRect(&mousePos, &buttonRect);
+    visual->isHovered = isHovered;
+    if (isHovered) {
         transform->scale = hoverSize;
+
         if (Input::isClickPressed()) {
 
             SceneManager* sceneManager = SceneManager::GetInstance();
@@ -29,12 +32,13 @@ void Button::Update() {
 
 void Button::Start() {
     Camera* camera = this->scene->camera;
-    transform->position = camera->position.x + camera->scale.x - transform->scale.x;
+    transform->position.x = camera->position.x + camera->scale.x/2 - transform->scale.x/2;
+    transform->position.y = 10;
 
     defaultSize = {transform->scale.x, transform->scale.y};
     centerPosition = Vector2(
         transform->position.x + defaultSize.x/2,
         transform->position.y + defaultSize.y/2
     );
-    hoverSize = {defaultSize.x + 50, defaultSize.y + 50};
+    hoverSize = {defaultSize.x * 1.05f, defaultSize.y * 1.05f};
 }

@@ -2,14 +2,14 @@
 
 #include "entity.h"
 #include "transform_component.hpp"
-#include "image_visual_component.hpp"
+#include "button_visual_component.hpp"
 #include "camera.hpp"
 
 class Button : public Entity
 {
 public:
     TransformComponent* transform;
-    ImageVisualComponent* visual;
+    ButtonVisualComponent* visual;
 
     Vector2 centerPosition;
     Vector2 defaultSize;
