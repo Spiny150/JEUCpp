@@ -3,13 +3,13 @@
 #include <SDL2/SDL.h>
 #include "assert.h"
 
-ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera) :
+ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& buttonText) :
     VisualComponent(entity, _WM, camera),
     textColor({0, 0, 0, 255}),
     backgroundColor({225, 225, 225, 255}),
     hoverBackgroundColor({255, 255, 255, 255}),
     borderColor({0, 0, 0, 255}),
-    buttonBorder(30)
+    buttonMargin(30)
 {
 
     TTF_Font* font = TTF_OpenFont("Assets/Fonts/SuperPixel.ttf", 52);
@@ -17,9 +17,7 @@ ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM,
         throw Exception("Erreur lors du TTF_OpenFont : " + std::string(TTF_GetError()));
     }
 
-    textColor = {0, 0, 0, 255};
-
-    SDL_Surface* textSurface = TTF_RenderText_Blended(font, "DuckDuckGame", textColor);
+    SDL_Surface* textSurface = TTF_RenderText_Blended(font, buttonText.c_str(), textColor);
 
     if (!textSurface) {
         throw Exception("Erreur lors du TTF_RenderText_Solid" + std::string(TTF_GetError()));
@@ -32,8 +30,8 @@ ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM,
 
     transform->position.x = 0;
     transform->position.y = 0;
-    transform->scale.x = textSurface->w + buttonBorder;
-    transform->scale.y = textSurface->h + buttonBorder;
+    transform->scale.x = textSurface->w + buttonMargin;
+    transform->scale.y = textSurface->h + buttonMargin;
 
 
     SDL_FreeSurface(textSurface);
@@ -49,8 +47,8 @@ void ButtonVisualComponent::Render() {
     SDL_FRect boxRect = transform->getFRect();
 
     SDL_Rect textRect;
-    textRect.w = transform->scale.x - buttonBorder;
-    textRect.h = transform->scale.y - buttonBorder;
+    textRect.w = transform->scale.x - buttonMargin;
+    textRect.h = transform->scale.y - buttonMargin;
     textRect.x = transform->position.x + transform->scale.x/2 - textRect.w/2;
     textRect.y = transform->position.y + transform->scale.y/2 - textRect.h/2;
 

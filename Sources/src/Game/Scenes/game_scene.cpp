@@ -12,10 +12,10 @@ void GameScene::Init() {
     this->camera->velocity = Vector2();
 
     Entity* player = new Player(WM, camera);
-    Entity* ground  = new Ground(WM, camera);
-    Entity* ground2  = new Ground(WM, camera);
+    Entity* ground = new Ground(WM, camera);
+    Entity* ground2 = new Ground(WM, camera);
 
-    Entity* button = new Button(WM, camera);
+    Entity* button = new Button(WM, camera, "coucou");
     Entity* sky = new Sky(WM, camera);
 
     this->AddEntity(sky);

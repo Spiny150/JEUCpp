@@ -11,12 +11,12 @@ private:
     SDL_Color backgroundColor;
     SDL_Color hoverBackgroundColor;
     SDL_Color borderColor;
-    int buttonBorder;
+    int buttonMargin;
     //SDL_Rect textRect;
 public:
     bool isHovered;
 
-    ButtonVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera);
+    ButtonVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& buttonText);
     virtual ~ButtonVisualComponent();
 
     void Render() override;

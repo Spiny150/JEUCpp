@@ -1,14 +1,25 @@
 #include "button.hpp"
 #include "inputs.h"
 #include "scene_manager.hpp"
+#include "assert.h"
 
-Button::Button(WindowManager* WM, Camera* camera) {
+Button::Button(WindowManager* WM, Camera* camera, const std::string& buttonText) {
     transform = addComponent<TransformComponent>();
-    visual = addComponent<ButtonVisualComponent>(WM, camera);
+    visual = addComponent<ButtonVisualComponent>(WM, camera, buttonText);
+
+    defaultSize = {transform->scale.x, transform->scale.y};
+    centerPosition = Vector2(
+        transform->position.x + defaultSize.x/2,
+        transform->position.y + defaultSize.y/2
+    );
+    hoverSize = {defaultSize.x * 1.05f, defaultSize.y * 1.05f};
 }
 
-Button::~Button() {
+Button::~Button() {}
 
+void Button::OnClick() {
+    SceneManager* sceneManager = SceneManager::GetInstance();
+    sceneManager->SwitchToScene(SceneTag::Game);
 }
 
 void Button::Update() {
@@ -18,27 +29,13 @@ void Button::Update() {
     transform->scale = defaultSize;
     bool isHovered = SDL_PointInFRect(&mousePos, &buttonRect);
     visual->isHovered = isHovered;
+
     if (isHovered) {
         transform->scale = hoverSize;
 
         if (Input::isClickPressed()) {
-
-            SceneManager* sceneManager = SceneManager::GetInstance();
-            sceneManager->SwitchToScene(SceneTag::Game);
+            OnClick();
         }
     }
     transform->position = centerPosition + (transform->scale * -0.5);
-}
-
-void Button::Start() {
-    Camera* camera = this->scene->camera;
-    transform->position.x = camera->position.x + camera->scale.x/2 - transform->scale.x/2;
-    transform->position.y = 10;
-
-    defaultSize = {transform->scale.x, transform->scale.y};
-    centerPosition = Vector2(
-        transform->position.x + defaultSize.x/2,
-        transform->position.y + defaultSize.y/2
-    );
-    hoverSize = {defaultSize.x * 1.05f, defaultSize.y * 1.05f};
 }

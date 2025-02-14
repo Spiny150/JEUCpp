@@ -15,9 +15,10 @@ public:
     Vector2 defaultSize;
     Vector2 hoverSize;
     
-    Button(WindowManager* WM, Camera* camera);
+    Button(WindowManager* WM, Camera* camera, const std::string& buttonText);
     ~Button();
 
+    void OnClick();
+
     void Update() override;
-    void Start() override;
 };
