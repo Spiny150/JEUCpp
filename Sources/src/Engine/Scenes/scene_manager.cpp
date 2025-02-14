@@ -45,6 +45,7 @@ void SceneManager::Update() {
     {
     case SceneState::SceneShown:
         if (currentScene) {
+            currentScene->camera->Update();
             currentScene->Update();
             currentScene->Render();
         }

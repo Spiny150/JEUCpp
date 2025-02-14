@@ -1,4 +1,4 @@
-#include "game_scene.hpp"
+#include "main_menu_scene.hpp"
 #include "entity.h"
 #include "physics_component.hpp"
 #include "player.h"
@@ -7,7 +7,7 @@
 #include "sky.hpp"
 #include "start_button.hpp"
 
-void GameScene::Init() {
+void MainMenuScene::Init() {
 
     this->camera->position = Vector2();
     this->camera->velocity = Vector2();
@@ -27,11 +27,10 @@ void GameScene::Init() {
     this->AddEntity(startButton);
 
     this->Start();
-    this->camera->velocity = Vector2(100, 0);
     ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
 }
 
-void GameScene::Update() {
+void MainMenuScene::Update() {
 
     for (Entity* entity : entities) {
         entity->Update();
@@ -54,7 +53,7 @@ void GameScene::Update() {
     }
 }
 
-void GameScene::CleanUp() {
+void MainMenuScene::CleanUp() {
     for (Entity*& entity : this->entities) { // Référence au pointeur pour le modifier
         if (entity) {  // Vérifie que le pointeur est valide
             delete entity;
@@ -66,6 +65,6 @@ void GameScene::CleanUp() {
     std::cout << "Menu cleaned up" << std::endl;
 }
 
-GameScene::~GameScene() {
-    std::cout << "GameScene destroyed" << std::endl;
+MainMenuScene::~MainMenuScene() {
+    std::cout << "MainMenu destroyed" << std::endl;
 }

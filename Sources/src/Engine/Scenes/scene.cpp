@@ -63,7 +63,7 @@ void Scene::Render() {
         visual->Render();
     }
     //SDL_RenderPresent(WM->SDLRenderer);
-    camera->Update();
+    //camera->Update();
 }
 
 SceneTag Scene::GetTag() {
