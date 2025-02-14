@@ -3,23 +3,13 @@
 #include "scene_manager.hpp"
 #include "assert.h"
 
-Button::Button(WindowManager* WM, Camera* camera, const std::string& buttonText) {
+Button::Button(WindowManager* WM, Camera* _camera, const std::string& buttonText) : camera(_camera) {
     transform = addComponent<TransformComponent>();
-    visual = addComponent<ButtonVisualComponent>(WM, camera, buttonText);
+    visual = addComponent<ButtonVisualComponent>(WM, _camera, buttonText);
 
-    defaultSize = {transform->scale.x, transform->scale.y};
-    centerPosition = Vector2(
-        transform->position.x + defaultSize.x/2,
-        transform->position.y + defaultSize.y/2
-    );
-    hoverSize = {defaultSize.x * 1.05f, defaultSize.y * 1.05f};
-}
-
-Button::~Button() {}
-
-void Button::OnClick() {
-    SceneManager* sceneManager = SceneManager::GetInstance();
-    sceneManager->SwitchToScene(SceneTag::Game);
+    defaultSize = Vector2();
+    centerPosition = Vector2();
+    hoverSize = Vector2();
 }
 
 void Button::Update() {

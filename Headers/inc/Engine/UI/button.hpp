@@ -14,11 +14,13 @@ public:
     Vector2 centerPosition;
     Vector2 defaultSize;
     Vector2 hoverSize;
+
+    Camera* camera;
     
     Button(WindowManager* WM, Camera* camera, const std::string& buttonText);
-    ~Button();
+    ~Button() = default;
 
-    void OnClick();
+    virtual void OnClick() {};
 
     void Update() override;
 };

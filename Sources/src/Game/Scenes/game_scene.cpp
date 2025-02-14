@@ -5,6 +5,7 @@
 #include "ground.hpp"
 #include "button.hpp"
 #include "sky.hpp"
+#include "start_button.hpp"
 
 void GameScene::Init() {
 
@@ -15,18 +16,18 @@ void GameScene::Init() {
     Entity* ground = new Ground(WM, camera);
     Entity* ground2 = new Ground(WM, camera);
 
-    Entity* button = new Button(WM, camera, "coucou");
+    //Entity* button = new Button(WM, camera, "coucou");
+    Entity* startButton = new StartButton(WM, camera);
     Entity* sky = new Sky(WM, camera);
 
     this->AddEntity(sky);
     this->AddEntity(player);
     this->AddEntity(ground2);
     this->AddEntity(ground);
-    this->AddEntity(button);
+    this->AddEntity(startButton);
 
     this->Start();
     ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
-    ground2->getComponent<TransformComponent>()->position.y += 0;
 }
 
 void GameScene::Update() {
