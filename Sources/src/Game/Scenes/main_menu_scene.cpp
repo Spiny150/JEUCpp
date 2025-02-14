@@ -12,22 +12,17 @@ void MainMenuScene::Init() {
     this->camera->position = Vector2();
     this->camera->velocity = Vector2();
 
-    Entity* player = new Player(WM, camera);
     Entity* ground = new Ground(WM, camera);
-    Entity* ground2 = new Ground(WM, camera);
 
     //Entity* button = new Button(WM, camera, "coucou");
     Entity* startButton = new StartButton(WM, camera);
     Entity* sky = new Sky(WM, camera);
 
     this->AddEntity(sky);
-    this->AddEntity(player);
-    this->AddEntity(ground2);
     this->AddEntity(ground);
     this->AddEntity(startButton);
 
     this->Start();
-    ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
 }
 
 void MainMenuScene::Update() {

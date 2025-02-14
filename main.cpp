@@ -9,6 +9,7 @@
 #include "inputs.h"
 #include "scene_manager.hpp"
 #include "game_scene.hpp"
+#include "main_menu_scene.hpp"
 #include <memory>
 
 int main() {
@@ -28,9 +29,10 @@ int main() {
 
     SceneManager* sceneManager = SceneManager::CreateInstance(WM);
 
+    sceneManager->AddScene(SceneTag::MainMenu, std::make_unique<MainMenuScene>(WM));
     sceneManager->AddScene(SceneTag::Game, std::make_unique<GameScene>(WM));
 
-    sceneManager->SwitchToScene(SceneTag::Game);
+    sceneManager->SwitchToScene(SceneTag::MainMenu);
 
     bool quit = false;
     while (!quit)
