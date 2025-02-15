@@ -6,6 +6,7 @@
 #include "button.hpp"
 #include "sky.hpp"
 #include "start_button.hpp"
+#include "tube.hpp"
 
 void GameScene::Init() {
 
@@ -15,6 +16,14 @@ void GameScene::Init() {
     Entity* player = new Player(WM, camera);
     Entity* ground = new Ground(WM, camera);
     Entity* ground2 = new Ground(WM, camera);
+    Entity* tube1 = new Tube(WM, camera, Vector2(212.5 * 1, -400), SDL_FLIP_VERTICAL);
+    Entity* tube2 = new Tube(WM, camera, Vector2(212.5 * 1, 500), SDL_FLIP_NONE);
+    Entity* tube3 = new Tube(WM, camera, Vector2(212.5 * 2, -400), SDL_FLIP_VERTICAL);
+    Entity* tube4 = new Tube(WM, camera, Vector2(212.5 * 2, 500), SDL_FLIP_NONE);
+    Entity* tube5 = new Tube(WM, camera, Vector2(212.5 * 3, -400), SDL_FLIP_VERTICAL);
+    Entity* tube6 = new Tube(WM, camera, Vector2(212.5 * 3, 500), SDL_FLIP_NONE);
+    Entity* tube7 = new Tube(WM, camera, Vector2(212.5 * 4, -400), SDL_FLIP_VERTICAL);
+    Entity* tube8 = new Tube(WM, camera, Vector2(212.5 * 4, 500), SDL_FLIP_NONE);
 
     //Entity* button = new Button(WM, camera, "coucou");
     Entity* sky = new Sky(WM, camera);
@@ -23,9 +32,17 @@ void GameScene::Init() {
     this->AddEntity(player);
     this->AddEntity(ground2);
     this->AddEntity(ground);
+    this->AddEntity(tube1);
+    this->AddEntity(tube2);
+    this->AddEntity(tube3);
+    this->AddEntity(tube4);
+    this->AddEntity(tube5);
+    this->AddEntity(tube6);
+    this->AddEntity(tube7);
+    this->AddEntity(tube8);
 
     this->Start();
-    this->camera->velocity = Vector2(100, 0);
+    this->camera->velocity = Vector2(200, 0);
     ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
 }
 

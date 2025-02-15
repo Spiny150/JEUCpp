@@ -20,7 +20,7 @@ Player::~Player() {
 
 void Player::Start() {
     this->transform->position = Vector2(300, 300);
-    this->physics->velocity = Vector2(0, -500);
+    this->physics->velocity = Vector2(200, -500);
 }
 
 void Player::Update() {
@@ -28,6 +28,6 @@ void Player::Update() {
     if (Input::isKeyPressed(SDL_SCANCODE_SPACE)) {
         this->physics->velocity.y = -250;
     }
-    this->physics->velocity.x = this->scene->camera->velocity.x;
+    //this->physics->velocity.x += 100 * Time::deltaTime;
 }
 

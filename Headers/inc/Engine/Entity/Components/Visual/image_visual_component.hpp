@@ -6,10 +6,10 @@
 class ImageVisualComponent : public VisualComponent {
 private:
     SDL_Texture* texture;
-    SDL_RendererFlip flip;
     SDL_Rect* srcRect; // Part de l'image selectionnée pour l'affichage
     SDL_Rect fullSrcRect; // Dimensions totale de l'image
 public:
+    SDL_RendererFlip flip;
 
     ImageVisualComponent(Entity& entity, WindowManager* WM, Camera* camera, const std::string& imgPath);
     virtual ~ImageVisualComponent();
