@@ -3,7 +3,7 @@
 #include "visual_component.hpp"
 #include "assert.h"
 
-Scene::Scene(WindowManager* _WM) : WM(_WM) {
+Scene::Scene(WindowManager* _WM) : WM(_WM), gameState(GameState::Undefined) {
     this->camera = new Camera(WM->windowSize);
     std::cout << "Scene initialisée" << std::endl;
 }

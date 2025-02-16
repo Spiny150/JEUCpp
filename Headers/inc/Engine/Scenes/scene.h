@@ -7,6 +7,14 @@
 #include <vector>
 #include <map>
 
+enum class GameState {
+    Undefined,
+    Paused,
+    Running,
+    GameWin,
+    GameLost
+};
+
 class Scene {
 protected:
     std::vector<Entity*> entities;
@@ -15,6 +23,9 @@ protected:
 public:
     WindowManager* WM;
     Camera* camera;
+    GameState gameState;
+
+
     Scene(WindowManager* _WM);
     ~Scene();
 

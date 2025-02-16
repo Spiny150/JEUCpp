@@ -43,6 +43,7 @@ ButtonVisualComponent::~ButtonVisualComponent() {
 }
 
 void ButtonVisualComponent::Render() {
+    if (!isActive) return;
 
     SDL_FRect boxRect = transform->getFRect();
 

@@ -13,6 +13,8 @@ Button::Button(WindowManager* WM, Camera* _camera, const std::string& buttonText
 }
 
 void Button::Update() {
+    if (!visual->isActive) return;
+
     SDL_FPoint mousePos = Input::mousePos.getSDL_FPoint();
     SDL_FRect buttonRect = transform->getFRect();
 

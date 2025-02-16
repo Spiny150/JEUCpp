@@ -10,7 +10,8 @@ VisualComponent::VisualComponent(Entity& entity, WindowManager* _WM, Camera* _ca
     Component(entity),
     WM(_WM),
     camera(_camera),
-    renderLayer(0)
+    renderLayer(0),
+    isActive(true)
     {
         transform = entity.getComponent<TransformComponent>();
         assert(transform);

@@ -3,8 +3,8 @@
 #include "assert.h"
 
 ImageVisualComponent::ImageVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& imgPath) : VisualComponent(entity, _WM, camera),
-flip(SDL_FLIP_NONE),
-srcRect(nullptr)
+srcRect(nullptr),
+flip(SDL_FLIP_NONE)
 {
     assert(transform);
     if (!transform) return;
@@ -34,6 +34,7 @@ ImageVisualComponent::~ImageVisualComponent() {
 }
 
 void ImageVisualComponent::Render() {
+    if (!isActive) return;
 
     if (!transform) {
         throw Exception("Visual component missing transform");

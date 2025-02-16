@@ -16,6 +16,7 @@ protected:
     Camera* camera;
 public:
     int renderLayer;
+    bool isActive;
 
     VisualComponent(Entity& entity, WindowManager* _WM, Camera* camera);
     virtual ~VisualComponent() = default;
