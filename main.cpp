@@ -52,9 +52,6 @@ int main() {
                 break;
             }
         }
-        if (Input::isKeyPressed(SDL_SCANCODE_ESCAPE)) {
-            Time::timeScale = !Time::timeScale;
-        }
         sceneManager->Update();
     }
 

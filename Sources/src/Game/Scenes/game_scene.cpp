@@ -7,6 +7,9 @@
 #include "sky.hpp"
 #include "start_button.hpp"
 #include "tube.hpp"
+#include "gray_filter.hpp"
+#include "time.hpp"
+#include "inputs.h"
 
 void GameScene::Init() {
 
@@ -16,6 +19,7 @@ void GameScene::Init() {
     Entity* player = new Player(WM, camera);
     Entity* ground = new Ground(WM, camera);
     Entity* ground2 = new Ground(WM, camera);
+
     Entity* tube1 = new Tube(WM, camera, Vector2(212.5 * 1, -400), SDL_FLIP_VERTICAL);
     Entity* tube2 = new Tube(WM, camera, Vector2(212.5 * 1, 500), SDL_FLIP_NONE);
     Entity* tube3 = new Tube(WM, camera, Vector2(212.5 * 2, -400), SDL_FLIP_VERTICAL);
@@ -24,6 +28,7 @@ void GameScene::Init() {
     Entity* tube6 = new Tube(WM, camera, Vector2(212.5 * 3, 500), SDL_FLIP_NONE);
     Entity* tube7 = new Tube(WM, camera, Vector2(212.5 * 4, -400), SDL_FLIP_VERTICAL);
     Entity* tube8 = new Tube(WM, camera, Vector2(212.5 * 4, 500), SDL_FLIP_NONE);
+    Entity* gray_filter = new GrayFilter(WM, camera);
 
     //Entity* button = new Button(WM, camera, "coucou");
     Entity* sky = new Sky(WM, camera);
@@ -40,13 +45,23 @@ void GameScene::Init() {
     this->AddEntity(tube6);
     this->AddEntity(tube7);
     this->AddEntity(tube8);
+    this->AddEntity(gray_filter);
 
     this->Start();
     this->camera->velocity = Vector2(200, 0);
     ground2->getComponent<TransformComponent>()->position.x = camera->scale.x;
+    this->gameState = GameState::Running;
 }
 
 void GameScene::Update() {
+    if (Input::isKeyPressed(SDL_SCANCODE_ESCAPE)) {
+        Time::timeScale = !Time::timeScale;
+        if (gameState == GameState::Running) {
+            this->gameState = GameState::Paused;
+        } else {
+            gameState = GameState::Running;
+        }
+    }
 
     for (Entity* entity : entities) {
         entity->Update();
