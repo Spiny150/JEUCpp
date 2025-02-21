@@ -13,7 +13,7 @@ ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM,
     isHovered(false)
 {
 
-    TTF_Font* font = TTF_OpenFont("Assets/Fonts/SuperPixel.ttf", 52);
+    TTF_Font* font = TTF_OpenFont("Assets/Fonts/SuperPixel.ttf", 32);
     if (!font) {
         throw Exception("Erreur lors du TTF_OpenFont : " + std::string(TTF_GetError()));
     }
