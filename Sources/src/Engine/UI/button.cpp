@@ -7,9 +7,14 @@ Button::Button(WindowManager* WM, Camera* _camera, const std::string& buttonText
     transform = addComponent<TransformComponent>();
     visual = addComponent<ButtonVisualComponent>(WM, _camera, buttonText);
 
-    defaultSize = Vector2();
-    centerPosition = Vector2();
-    hoverSize = Vector2();
+    defaultScale = {transform->scale.x, transform->scale.y};
+    transform->position = ((Vector2) camera->scale / 2) - defaultScale/2;
+
+    centerPosition = Vector2(
+        transform->position.x + defaultScale.x/2,
+        transform->position.y + defaultScale.y/2
+    );
+    hoverScale = {defaultScale.x * 1.05f, defaultScale.y * 1.05f};
 }
 
 void Button::Update() {
@@ -18,16 +23,16 @@ void Button::Update() {
     SDL_FPoint mousePos = Input::mousePos.getSDL_FPoint();
     SDL_FRect buttonRect = transform->getFRect();
 
-    transform->scale = defaultSize;
+    transform->scale = defaultScale;
     bool isHovered = SDL_PointInFRect(&mousePos, &buttonRect);
     visual->isHovered = isHovered;
 
     if (isHovered) {
-        transform->scale = hoverSize;
+        transform->scale = hoverScale;
 
         if (Input::isClickPressed()) {
             OnClick();
         }
     }
-    transform->position = centerPosition + (transform->scale * -0.5);
+    transform->position = centerPosition - transform->scale / 2;
 }

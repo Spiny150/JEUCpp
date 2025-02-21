@@ -12,8 +12,8 @@ public:
     ButtonVisualComponent* visual;
 
     Vector2 centerPosition;
-    Vector2 defaultSize;
-    Vector2 hoverSize;
+    Vector2 defaultScale;
+    Vector2 hoverScale;
 
     Camera* camera;
     

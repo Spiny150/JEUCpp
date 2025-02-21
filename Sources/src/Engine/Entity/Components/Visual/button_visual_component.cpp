@@ -28,8 +28,6 @@ ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM,
         throw Exception("Erreur lors du SDL_CreateTextureFromSurface" + std::string(SDL_GetError()));
     }
 
-    transform->position.x = 0;
-    transform->position.y = 0;
     transform->scale.x = textSurface->w + buttonMargin;
     transform->scale.y = textSurface->h + buttonMargin;
 
