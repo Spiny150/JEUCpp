@@ -21,4 +21,5 @@ public:
     virtual void OnClick() {};
 
     void Update() override;
+    void SetPosition(Vector2 position);
 };

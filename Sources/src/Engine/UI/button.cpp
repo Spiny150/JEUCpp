@@ -7,14 +7,7 @@ Button::Button(WindowManager* WM, Camera* _camera, const std::string& buttonText
     transform = addComponent<TransformComponent>();
     visual = addComponent<ButtonVisualComponent>(WM, _camera, buttonText);
 
-    defaultScale = {transform->scale.x, transform->scale.y};
-    transform->position = ((Vector2) camera->scale / 2) - defaultScale/2;
-
-    centerPosition = Vector2(
-        transform->position.x + defaultScale.x/2,
-        transform->position.y + defaultScale.y/2
-    );
-    hoverScale = {defaultScale.x * 1.05f, defaultScale.y * 1.05f};
+    SetPosition(Vector2());
 }
 
 void Button::Update() {
@@ -36,4 +29,16 @@ void Button::Update() {
         }
     }
     transform->position = centerPosition - transform->scale / 2;
+}
+
+void Button::SetPosition(Vector2 position) {
+    defaultScale = {transform->scale.x, transform->scale.y};
+
+    transform->position = position;
+
+    centerPosition = Vector2(
+        transform->position.x + defaultScale.x/2,
+        transform->position.y + defaultScale.y/2
+    );
+    hoverScale = {defaultScale.x * 1.05f, defaultScale.y * 1.05f};
 }
