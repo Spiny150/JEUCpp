@@ -1,7 +1,7 @@
 #include "start_button.hpp"
 
 StartButton::StartButton(WindowManager* WM, Camera* camera) :
-    Button(WM, camera, "DuckDuckGame") {
+    Button(WM, camera, "Start") {
     defaultSize = {transform->scale.x, transform->scale.y};
     transform->position = ((Vector2) camera->scale / 2) - defaultSize/2;
 

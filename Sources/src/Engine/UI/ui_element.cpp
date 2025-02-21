@@ -1,5 +1,5 @@
 #include "ui_element.hpp"
-//#include ""
+#include "assert.h"
 
 UI_Element::UI_Element() {
     transform = addComponent<TransformComponent>();
@@ -8,6 +8,7 @@ UI_Element::UI_Element() {
 }
 
 void UI_Element::Update() {
+    assert(visual);
     if (!visual) return;
 
     GameState sceneGameState = this->getScene()->gameState;
