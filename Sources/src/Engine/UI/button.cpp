@@ -18,14 +18,15 @@ Button::Button(WindowManager* WM, Camera* _camera, const std::string& buttonText
 }
 
 void Button::Update() {
-    if (!visual->isActive) return;
+    UI_Element::Update();
 
     SDL_FPoint mousePos = Input::mousePos.getSDL_FPoint();
     SDL_FRect buttonRect = transform->getFRect();
 
     transform->scale = defaultScale;
     bool isHovered = SDL_PointInFRect(&mousePos, &buttonRect);
-    visual->isHovered = isHovered;
+    ButtonVisualComponent* buttonVisual = (ButtonVisualComponent*) visual;
+    buttonVisual->isHovered = isHovered;
 
     if (isHovered) {
         transform->scale = hoverScale;

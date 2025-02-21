@@ -1,15 +1,13 @@
 #pragma once
 
-#include "entity.h"
+#include "ui_element.hpp"
 #include "transform_component.hpp"
 #include "button_visual_component.hpp"
 #include "camera.hpp"
 
-class Button : public Entity
+class Button : public UI_Element
 {
 public:
-    TransformComponent* transform;
-    ButtonVisualComponent* visual;
 
     Vector2 centerPosition;
     Vector2 defaultScale;

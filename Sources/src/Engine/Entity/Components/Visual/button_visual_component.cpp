@@ -9,7 +9,8 @@ ButtonVisualComponent::ButtonVisualComponent(Entity& entity, WindowManager* _WM,
     backgroundColor({225, 225, 225, 255}),
     hoverBackgroundColor({255, 255, 255, 255}),
     borderColor({0, 0, 0, 255}),
-    buttonMargin(30)
+    buttonMargin(30),
+    isHovered(false)
 {
 
     TTF_Font* font = TTF_OpenFont("Assets/Fonts/SuperPixel.ttf", 52);

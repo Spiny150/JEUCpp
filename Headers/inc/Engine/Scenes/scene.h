@@ -12,7 +12,8 @@ enum class GameState {
     Paused,
     Running,
     GameWin,
-    GameLost
+    GameLost,
+    MainMenu
 };
 
 class Scene {

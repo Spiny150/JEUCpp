@@ -23,28 +23,13 @@ void MainMenuScene::Init() {
     this->AddEntity(startButton);
 
     this->Start();
+
+    this->gameState = GameState::MainMenu;
 }
 
 void MainMenuScene::Update() {
-
     for (Entity* entity : entities) {
         entity->Update();
-        PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
-        if (physics) physics->computeNextPosition();
-    }
-
-    for (Entity* entityA : entities) {
-        for (Entity* entityB : entities) {
-            if (entityA == entityB) continue;
-            PhysicsComponent* physicsA = entityA->getComponent<PhysicsComponent>();
-            if (physicsA) physicsA->checkCollision(entityB);
-        }
-    }
-
-    for (Entity* entity : entities) {
-        //Manage collisions
-        PhysicsComponent* physics = entity->getComponent<PhysicsComponent>();
-        if (physics) physics->applyNextPosition();
     }
 }
 
