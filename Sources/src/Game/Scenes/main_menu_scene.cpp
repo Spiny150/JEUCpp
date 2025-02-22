@@ -7,44 +7,52 @@
 #include "sky.hpp"
 #include "start_button.hpp"
 
+// Initialize the main menu scene
 void MainMenuScene::Init() {
-
+    // Reset camera position and velocity
     this->camera->position = Vector2();
     this->camera->velocity = Vector2();
 
+    // Create ground entity
     Entity* ground = new Ground(WM, camera);
 
-    //Entity* button = new Button(WM, camera, "coucou");
+    // Create start button and sky entities
     Entity* startButton = new StartButton(WM, camera);
     Entity* sky = new Sky(WM, camera);
 
+    // Add entities to the scene
     this->AddEntity(sky);
     this->AddEntity(ground);
     this->AddEntity(startButton);
 
+    // Start the scene and set initial game state
     this->Start();
-
     this->gameState = GameState::MainMenu;
 }
 
+// Update main menu logic every frame
 void MainMenuScene::Update() {
+    // Update all entities in the scene
     for (Entity* entity : entities) {
         entity->Update();
     }
 }
 
+// Clean up resources when the scene ends
 void MainMenuScene::CleanUp() {
-    for (Entity*& entity : this->entities) { // Référence au pointeur pour le modifier
-        if (entity) {  // Vérifie que le pointeur est valide
+    // Delete all entities and clear the list
+    for (Entity*& entity : this->entities) {
+        if (entity) {
             delete entity;
-            entity = nullptr;  // Évite les pointeurs suspendus
+            entity = nullptr;
         }
     }
-    entities.clear();  // Vide le vecteur après suppression
+    entities.clear();
     renderStack.clear();
     std::cout << "Menu cleaned up" << std::endl;
 }
 
+// Destructor
 MainMenuScene::~MainMenuScene() {
     std::cout << "MainMenu destroyed" << std::endl;
 }
