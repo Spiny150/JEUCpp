@@ -9,6 +9,12 @@
 
 #include "component.hpp"
 
+enum class EntityTag {
+    Undefined,
+    Player,
+    Obstacle
+};
+
 class WindowManager;
 class Scene;
 
@@ -20,6 +26,7 @@ protected:
     Scene* scene;
 
 public:
+    EntityTag tag;
 
     Entity();
     virtual ~Entity();

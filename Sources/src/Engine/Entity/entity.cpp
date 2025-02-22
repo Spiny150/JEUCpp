@@ -5,7 +5,7 @@
 #include "visual_component.hpp"
 
 // Entity constructor
-Entity::Entity() : scene(nullptr) {
+Entity::Entity() : scene(nullptr), tag(EntityTag::Undefined) {
     std::cout << "Entity initialized" << std::endl;
 }
 

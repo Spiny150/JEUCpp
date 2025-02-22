@@ -40,12 +40,12 @@ SDL_FRect PhysicsComponent::getNextPosFRect() {
     return rect;
 }
 
-void PhysicsComponent::checkCollision(Entity* other) {
-    if (this->isStatic || !hasCollider) return;
+bool PhysicsComponent::checkCollision(Entity* other) {
+    if (this->isStatic || !hasCollider) return false;
 
     PhysicsComponent* otherPhysics = other->getComponent<PhysicsComponent>();
-    if (!otherPhysics) return;
-    if (!otherPhysics->hasCollider) return;
+    if (!otherPhysics) return false;
+    if (!otherPhysics->hasCollider) return false;
 
     SDL_FRect nextRectA = getNextPosFRect();
     SDL_FRect nextRectB = otherPhysics->getNextPosFRect();
@@ -75,4 +75,5 @@ void PhysicsComponent::checkCollision(Entity* other) {
                 otherTransform->position.x + otherTransform->scale.x;
         }
     }
+    return isColliding;
 }

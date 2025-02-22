@@ -11,7 +11,10 @@ Player::Player(WindowManager* WM, Camera* camera) : Entity() {
     
     // Validate window manager and camera pointers
     assert(WM && camera);
-    
+
+    // Set entity tag
+    this->tag = EntityTag::Player;
+
     // Add visual component with player sprite
     visual = addComponent<ImageVisualComponent>(WM, camera, "Assets/Player/Duck.png");
 

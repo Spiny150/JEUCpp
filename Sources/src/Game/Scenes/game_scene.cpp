@@ -80,10 +80,13 @@ void GameScene::Update() {
         if (gameState == GameState::Running) {
             this->gameState = GameState::Paused;
             Time::timeScale = 0;
-        } else {
+        } else if (gameState == GameState::Paused) {
             gameState = GameState::Running;
             Time::timeScale = 1;
         }
+    }
+    if (gameState == GameState::GameLost) {
+        Time::timeScale *= .9999;// / Time::unscaledDeltaTime;
     }
 
     // Update all entities
@@ -98,7 +101,12 @@ void GameScene::Update() {
         for (Entity* entityB : entities) {
             if (entityA == entityB) continue;
             PhysicsComponent* physicsA = entityA->getComponent<PhysicsComponent>();
-            if (physicsA) physicsA->checkCollision(entityB);
+            if (physicsA) {
+                bool isColliding = physicsA->checkCollision(entityB);
+                if (isColliding && entityA->tag == EntityTag::Player && entityB->tag == EntityTag::Obstacle) {
+                    this->gameState = GameState::GameLost;
+                }
+            }
         }
     }
 

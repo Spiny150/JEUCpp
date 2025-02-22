@@ -21,7 +21,7 @@ public:
     void applyNextPosition();
 
     SDL_FRect getNextPosFRect();
-    void checkCollision(Entity* other);
+    bool checkCollision(Entity* other);
 };
 
 #endif
