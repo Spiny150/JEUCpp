@@ -1,5 +1,4 @@
 #include "gray_filter.hpp"
-#include "image_visual_component.hpp"
 
 GrayFilter::GrayFilter(WindowManager* WM, Camera* _camera) {
     visual = addComponent<ImageVisualComponent>(WM, _camera, "Assets/World/gray_filter.png");

@@ -14,6 +14,7 @@
 #include "pause_button.hpp"
 #include "main_menu_button.hpp"
 #include "restart_button.hpp"
+#include "gameover_text.hpp"
 
 // Initialize the game scene
 void GameScene::Init() {
@@ -46,6 +47,7 @@ void GameScene::Init() {
     Entity* main_menu_button = new MainMenuButton(WM, camera);
     Entity* restart_button = new RestartButton(WM, camera);
     Entity* sky = new Sky(WM, camera);
+    Entity* gameover_text = new GameoverText(WM, camera);
 
     // Add all entities to the scene
     this->AddEntity(sky);
@@ -65,6 +67,7 @@ void GameScene::Init() {
     this->AddEntity(pause_button);
     this->AddEntity(main_menu_button);
     this->AddEntity(restart_button);
+    this->AddEntity(gameover_text);
 
     // Start the scene and set initial game state
     this->Start();
