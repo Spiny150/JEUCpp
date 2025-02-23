@@ -4,6 +4,8 @@ MainMenuButton::MainMenuButton(WindowManager* WM, Camera* camera) :
     Button(WM, camera, "Main Menu") {
     visual->isActive = false;
     activeStates.push_back(GameState::Paused);
+    activeStates.push_back(GameState::GameLost);
+    activeStates.push_back(GameState::GameWin);
     Vector2 position = ((Vector2) camera->scale / 2) - defaultScale/2;
     position.y += 100;
     SetPosition(position);

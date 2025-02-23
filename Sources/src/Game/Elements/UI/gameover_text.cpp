@@ -15,6 +15,6 @@ void GameoverText::Update() {
         camera->position +
         camera->scale / 2 -
         transform->scale / 2;
-    position.y -= 200;
+    position.y -= 150;
     transform->position = position;
 }
