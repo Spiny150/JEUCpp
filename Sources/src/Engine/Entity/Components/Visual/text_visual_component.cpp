@@ -8,7 +8,7 @@ TextVisualComponent::TextVisualComponent(Entity& entity, WindowManager* _WM, Cam
     textColor({255, 255, 255, 255})
 {
 
-    font = TTF_OpenFont("Assets/Fonts/SuperPixel.ttf", 32);
+    font = TTF_OpenFont("Assets/Fonts/MightySouly.ttf", 32);
     if (!font) {
         throw Exception("Erreur lors du TTF_OpenFont : " + std::string(TTF_GetError()));
     }
