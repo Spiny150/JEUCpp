@@ -33,7 +33,7 @@ Player::~Player() {
 void Player::Start() {
     // Set initial position and velocity
     this->transform->position = Vector2(300, 300);
-    this->physics->velocity = Vector2(200, -500);
+    this->physics->velocity = Vector2(200, -300);
 }
 
 // Update player state every frame
@@ -45,4 +45,6 @@ void Player::Update() {
     if (Input::isKeyPressed(SDL_SCANCODE_SPACE)) {
         this->physics->velocity.y = -250;
     }
+    int score = transform->position.x / 283.33;
+    std::cout << "Score: " << score << std::endl;
 }
