@@ -37,8 +37,6 @@ int main() {
 
     scoreManager->loadScores("scores.data");
 
-    std::cout << "Game Score : " << scoreManager->getBestScore(SceneTag::Game) << std::endl;
-
     // Register game scenes
     sceneManager->AddScene(SceneTag::MainMenu, std::make_unique<MainMenuScene>(WM));
     sceneManager->AddScene(SceneTag::Game, std::make_unique<GameScene>(WM));
