@@ -11,6 +11,7 @@
 #include "game_scene.hpp"
 #include "main_menu_scene.hpp"
 #include <memory>
+#include "score_manager.hpp"
 
 // Main entry point of the application
 int main() {
@@ -32,6 +33,11 @@ int main() {
 
     // Create scene manager instance
     SceneManager* sceneManager = SceneManager::CreateInstance(WM);
+    ScoreManager* scoreManager = ScoreManager::CreateInstance();
+
+    scoreManager->loadScores("scores.data");
+
+    std::cout << "Game Score : " << scoreManager->getBestScore(SceneTag::Game) << std::endl;
 
     // Register game scenes
     sceneManager->AddScene(SceneTag::MainMenu, std::make_unique<MainMenuScene>(WM));
@@ -62,6 +68,7 @@ int main() {
 
         // Update current scene
         sceneManager->Update();
+        //std::cout << "Game Score : " << scoreManager->getBestScore(SceneTag::Game) << std::endl;
     }
 
     // Clean up resources

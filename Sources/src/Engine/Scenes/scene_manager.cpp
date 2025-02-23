@@ -1,6 +1,7 @@
 #include "scene_manager.hpp"
 #include "assert.h"
 #include "time.hpp"
+#include "score_manager.hpp"
 
 // SceneManager constructor
 SceneManager::SceneManager(WindowManager* _WM) :
@@ -40,6 +41,9 @@ void SceneManager::AddScene(SceneTag tag, std::unique_ptr<Scene> scene) {
 
 // Switch to a different scene
 void SceneManager::SwitchToScene(SceneTag tag) {
+    ScoreManager* scoreManager = ScoreManager::GetInstance();
+    scoreManager->saveScores("scores.data");
+
     intendedSceneTag = tag;
     sceneState = SceneState::TransitionOut;
 }

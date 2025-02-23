@@ -71,6 +71,7 @@ bool ScoreManager::loadScores(const std::string& filename) {
     if (!ifs) {
         std::cerr << "Fichier non trouvé : " << filename << ". Initialisation des scores à zéro." << std::endl;
         scores[SceneTag::Game] = {0, 0};
+        scores[SceneTag::MainMenu] = {0, 0};
         return false;
     }
 
@@ -78,12 +79,15 @@ bool ScoreManager::loadScores(const std::string& filename) {
         SceneTag mode;
         ScoreData score;
 
-        ifs.read(reinterpret_cast<char*>(&mode), sizeof(SceneTag));
-        ifs.read(reinterpret_cast<char*>(&score), sizeof(ScoreData));
+        // Tente de lire le mode
+        if (!ifs.read(reinterpret_cast<char*>(&mode), sizeof(SceneTag)))
+            break;  // Sort de la boucle si la lecture échoue
 
-        if (ifs.gcount() == sizeof(SceneTag) + sizeof(ScoreData)) {
-            scores[mode] = score;
-        }
+        // Tente de lire le score
+        if (!ifs.read(reinterpret_cast<char*>(&score), sizeof(ScoreData)))
+            break;  // Sort si impossible de lire le score
+
+        this->scores[mode] = score;
     }
 
     return true;

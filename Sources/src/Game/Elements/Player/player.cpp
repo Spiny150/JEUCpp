@@ -2,6 +2,7 @@
 #include "Engine/time.hpp"
 #include "inputs.h"
 #include "assert.h"
+#include "score_manager.hpp"
 
 // Player constructor
 Player::Player(WindowManager* WM, Camera* camera) : Entity() {
@@ -46,5 +47,6 @@ void Player::Update() {
         this->physics->velocity.y = -250;
     }
     int score = transform->position.x / 283.33;
-    std::cout << "Score: " << score << std::endl;
+    ScoreManager* scoreManager = ScoreManager::GetInstance();
+    scoreManager->setCurrentScore(this->getScene()->GetTag(), score);
 }

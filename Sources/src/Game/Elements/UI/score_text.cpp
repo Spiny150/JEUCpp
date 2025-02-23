@@ -1,5 +1,6 @@
 #include "score_text.hpp"
 #include "text_visual_component.hpp"
+#include "score_manager.hpp"
 
 ScoreText::ScoreText(WindowManager* WM, Camera* camera) {
     visual = addComponent<TextVisualComponent>(WM, camera, "1");
@@ -15,9 +16,9 @@ ScoreText::ScoreText(WindowManager* WM, Camera* camera) {
 void ScoreText::Update() {
     UI_Element::Update();
 
-    int random = rand() % 10000;
-    if (random >= 9999) {
-        TextVisualComponent* visualComponent = (TextVisualComponent*) visual;
-        visualComponent->UpdateText(std::to_string(rand() % 10));
-    }
+    ScoreManager* scoreMananger = ScoreManager::GetInstance();
+    TextVisualComponent* textVisual = (TextVisualComponent*) visual;
+
+    int currentScore = scoreMananger->getCurrentScore(this->getScene()->GetTag());
+    textVisual->UpdateText(std::to_string(currentScore));
 }
