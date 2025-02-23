@@ -30,10 +30,12 @@ void Tube::Update() {
     // Handle tube positioning relative to camera
     if (transform->position.x + transform->scale.x < camera->position.x) {
         transform->position.x = camera->position.x + camera->scale.x;
+
+        // If tube is the main tube, select a new random height
         if (!matchingTube) {
             transform->position.y = -transform->scale.y + MIN_TOP_DIST + rand() % SPAWN_RANGE;
         }
-        else {
+        else { // If the tube follow another tube, position it below the matching tube
             transform->position.y = matchingTube->getComponent<TransformComponent>()->position.y + INTER_TUBE_DIST + transform->scale.y;
         }
     }
