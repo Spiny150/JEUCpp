@@ -18,3 +18,15 @@ SDL_FRect TransformComponent::getFRect() {
     };
     return rect;
 }
+
+// Get the transform as an SDL_Rect
+SDL_Rect TransformComponent::getRect() {
+    SDL_Rect rect = {
+        (int) position.x,
+        (int) position.y,
+        (int) scale.x,
+        (int) scale.y,
+    };
+    return rect;
+}
+

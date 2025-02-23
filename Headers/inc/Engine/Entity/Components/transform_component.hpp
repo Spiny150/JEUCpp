@@ -11,4 +11,5 @@ public:
 
     TransformComponent(Entity& entity);
     SDL_FRect getFRect();
+    SDL_Rect getRect();
 };
