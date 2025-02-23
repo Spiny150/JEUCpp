@@ -15,7 +15,9 @@ public:
     ImageVisualComponent* visual;
     Camera* camera;
 
-    Tube(WindowManager* WM, Camera* camera, Vector2 position, SDL_RendererFlip flip);
+    Entity* matchingTube;
+
+    Tube(WindowManager* WM, Camera* camera, Vector2 position, SDL_RendererFlip flip, Entity* _matchingTube = nullptr);
     ~Tube() = default;
 
     void Update() override;

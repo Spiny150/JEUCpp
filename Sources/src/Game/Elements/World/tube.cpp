@@ -1,9 +1,13 @@
 #include "tube.hpp"
+#define MIN_TOP_DIST 50
+#define INTER_TUBE_DIST 200
+#define SPAWN_RANGE 250
 
 // Tube constructor
-Tube::Tube(WindowManager* _WM, Camera* _camera, Vector2 position, SDL_RendererFlip flip) :
+Tube::Tube(WindowManager* _WM, Camera* _camera, Vector2 position, SDL_RendererFlip flip, Entity* _matchingTube) :
     Entity(),
-    camera(_camera)
+    camera(_camera),
+    matchingTube(_matchingTube)
 {
     // Add transform, physics, and visual components
     transform = addComponent<TransformComponent>();
@@ -26,5 +30,11 @@ void Tube::Update() {
     // Handle tube positioning relative to camera
     if (transform->position.x + transform->scale.x < camera->position.x) {
         transform->position.x = camera->position.x + camera->scale.x;
+        if (!matchingTube) {
+            transform->position.y = -transform->scale.y + MIN_TOP_DIST + rand() % SPAWN_RANGE;
+        }
+        else {
+            transform->position.y = matchingTube->getComponent<TransformComponent>()->position.y + INTER_TUBE_DIST + transform->scale.y;
+        }
     }
 }

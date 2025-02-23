@@ -31,14 +31,12 @@ void GameScene::Init() {
     Entity* ground2 = new Ground(WM, camera);
 
     // Create tube obstacles with different positions and orientations
-    Entity* tube1 = new Tube(WM, camera, Vector2(212.5 * 1, -400), SDL_FLIP_VERTICAL);
-    Entity* tube2 = new Tube(WM, camera, Vector2(212.5 * 1, 500), SDL_FLIP_NONE);
-    Entity* tube3 = new Tube(WM, camera, Vector2(212.5 * 2, -400), SDL_FLIP_VERTICAL);
-    Entity* tube4 = new Tube(WM, camera, Vector2(212.5 * 2, 500), SDL_FLIP_NONE);
-    Entity* tube5 = new Tube(WM, camera, Vector2(212.5 * 3, -400), SDL_FLIP_VERTICAL);
-    Entity* tube6 = new Tube(WM, camera, Vector2(212.5 * 3, 500), SDL_FLIP_NONE);
-    Entity* tube7 = new Tube(WM, camera, Vector2(212.5 * 4, -400), SDL_FLIP_VERTICAL);
-    Entity* tube8 = new Tube(WM, camera, Vector2(212.5 * 4, 500), SDL_FLIP_NONE);
+    Entity* tube1 = new Tube(WM, camera, Vector2(283.33 * 1, -400), SDL_FLIP_VERTICAL);
+    Entity* tube2 = new Tube(WM, camera, Vector2(283.33 * 1, 500), SDL_FLIP_NONE, tube1);
+    Entity* tube3 = new Tube(WM, camera, Vector2(283.33 * 2, -400), SDL_FLIP_VERTICAL);
+    Entity* tube4 = new Tube(WM, camera, Vector2(283.33 * 2, 500), SDL_FLIP_NONE, tube3);
+    Entity* tube5 = new Tube(WM, camera, Vector2(283.33 * 3, -400), SDL_FLIP_VERTICAL);
+    Entity* tube6 = new Tube(WM, camera, Vector2(283.33 * 3, 500), SDL_FLIP_NONE, tube5);
 
     // Create UI elements
     Entity* gray_filter = new GrayFilter(WM, camera);
@@ -60,8 +58,6 @@ void GameScene::Init() {
     this->AddEntity(tube4);
     this->AddEntity(tube5);
     this->AddEntity(tube6);
-    this->AddEntity(tube7);
-    this->AddEntity(tube8);
     this->AddEntity(gray_filter);
     this->AddEntity(continue_button);
     this->AddEntity(pause_button);
