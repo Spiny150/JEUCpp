@@ -1,29 +1,16 @@
 {
-    "configurations": [
-        {
-            "name": "Linux",
-            "includePath": [
-                "${workspaceFolder}/Headers/inc/**",
-                "${workspaceFolder}/Sources/src/**",
-                "${workspaceFolder}/Headers/inc/Game/Elements/Player/**",
-                "${workspaceFolder}/Headers/inc/Game/Elements/**",
-                "${workspaceFolder}/Headers/inc/Game/**",
-                "${workspaceFolder}/Headers/inc/Engine/Entity",
-                "${workspaceFolder}/Headers/inc/Engine/Entity/Components/**",
-                "${workspaceFolder}/Headers/inc/Engine",
-                "${workspaceFolder}/Headers/inc/Engine/**",
-                "${workspaceFolder}/Headers/inc/Game/Elements/Player",
-                "${workspaceFolder}/Headers/inc/Engine/Entity/Components",
-                "${workspaceFolder}/Headers/inc/Engine/Scenes",
-                "${workspaceFolder}/Headers/inc/Engine/Entity/Components/Visual",
-                "${workspaceFolder}/Headers/inc/Game/Elements/UI"
-            ],
-            "defines": [],
-            "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c17",
-            "cppStandard": "gnu++17",
-            "intelliSenseMode": "linux-gcc-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "windows-gcc-x64",
+      "includePath": [
+        "${workspaceFolder}/**"
+      ],
+      "defines": [],
+      "compilerPath": "C:/mingw64/bin/gcc.exe",
+      "cStandard": "${default}",
+      "cppStandard": "${default}",
+      "intelliSenseMode": "windows-gcc-x64"
+    }
+  ],
+  "version": 4
 }

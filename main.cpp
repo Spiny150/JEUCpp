@@ -14,26 +14,30 @@
 #include "score_manager.hpp"
 
 // Main entry point of the application
-int main() {
+int main(int argv, char **args)
+{
     // Initialize random seed
     srand(time(NULL));
 
     // Initialize window and event handler
-    WindowManager* WM = nullptr;
+    WindowManager *WM = nullptr;
     SDL_Event event;
 
-    try {
+    try
+    {
         // Create game window with specified size and title
         WM = new WindowManager(Vector2Int(800, 600), "DuckDuckGame");
-    } catch(const std::exception& e) {
+    }
+    catch (const std::exception &e)
+    {
         // Handle window creation errors
         std::cerr << e.what() << '\n';
         return 1;
     }
 
     // Create scene manager instance
-    SceneManager* sceneManager = SceneManager::CreateInstance(WM);
-    ScoreManager* scoreManager = ScoreManager::CreateInstance();
+    SceneManager *sceneManager = SceneManager::CreateInstance(WM);
+    ScoreManager *scoreManager = ScoreManager::CreateInstance();
 
     scoreManager->loadScores("scores.data");
 
@@ -46,27 +50,30 @@ int main() {
 
     // Main game loop
     bool quit = false;
-    while (!quit) {
+    while (!quit)
+    {
         // Update time and input states
         Time::Update();
         Input::Update();
 
         // Process SDL events
-        while (SDL_PollEvent(&event)) {
-            switch (event.type) {
-                case SDL_QUIT:
-                    // Exit the game if window is closed
-                    quit = true;
-                    break;
-                
-                default:
-                    break;
+        while (SDL_PollEvent(&event))
+        {
+            switch (event.type)
+            {
+            case SDL_QUIT:
+                // Exit the game if window is closed
+                quit = true;
+                break;
+
+            default:
+                break;
             }
         }
 
         // Update current scene
         sceneManager->Update();
-        //std::cout << "Game Score : " << scoreManager->getBestScore(SceneTag::Game) << std::endl;
+        // std::cout << "Game Score : " << scoreManager->getBestScore(SceneTag::Game) << std::endl;
     }
 
     // Clean up resources
