@@ -3,14 +3,9 @@
 #include <unordered_map>
 #include <memory>
 #include "window_manager.h"
+#include "scene_tag.hpp"
 
 class Scene;
-
-enum class SceneTag {
-    Undefined,
-    MainMenu,
-    Game
-};
 
 enum class SceneState {
     SceneShown,
