@@ -3,12 +3,12 @@
 #include <SDL2/SDL.h>
 #include "assert.h"
 
-TextVisualComponent::TextVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& text) :
+TextVisualComponent::TextVisualComponent(Entity& entity, WindowManager* _WM, Camera* camera, const std::string& text, const std::string& fontName, SDL_Color _textColor, int textSize) :
     VisualComponent(entity, _WM, camera),
-    textColor({255, 255, 255, 255})
+    textColor(_textColor)
 {
 
-    font = TTF_OpenFont("Assets/Fonts/MightySouly.ttf", 32);
+    font = TTF_OpenFont(fontName.c_str(), textSize);
     if (!font) {
         throw Exception("Erreur lors du TTF_OpenFont : " + std::string(TTF_GetError()));
     }
