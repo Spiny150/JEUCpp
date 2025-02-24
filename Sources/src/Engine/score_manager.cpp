@@ -71,6 +71,7 @@ bool ScoreManager::loadScores(const std::string& filename) {
     if (!ifs) {
         std::cerr << "Fichier non trouvé : " << filename << ". Initialisation des scores à zéro." << std::endl;
         scores[SceneTag::Game] = {0, 0};
+        scores[SceneTag::GameHard] = {0, 0};
         scores[SceneTag::MainMenu] = {0, 0};
         return false;
     }

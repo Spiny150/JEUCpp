@@ -12,6 +12,7 @@
 #include "main_menu_scene.hpp"
 #include <memory>
 #include "score_manager.hpp"
+#include "game_scene_harder.hpp"
 
 // Main entry point of the application, parameters are necessary for SDL compilation on Windows
 int main(int argv, char **args)
@@ -45,6 +46,7 @@ int main(int argv, char **args)
     // Register game scenes
     sceneManager->AddScene(SceneTag::MainMenu, std::make_unique<MainMenuScene>(WM));
     sceneManager->AddScene(SceneTag::Game, std::make_unique<GameScene>(WM));
+    sceneManager->AddScene(SceneTag::GameHard, std::make_unique<GameSceneHarder>(WM));
 
     // Start with the main menu scene
     sceneManager->SwitchToScene(SceneTag::MainMenu);

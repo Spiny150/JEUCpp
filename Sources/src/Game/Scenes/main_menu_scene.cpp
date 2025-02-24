@@ -6,6 +6,7 @@
 #include "button.hpp"
 #include "sky.hpp"
 #include "start_button.hpp"
+#include "start_hard_button.hpp"
 
 // Initialize the main menu scene
 void MainMenuScene::Init() {
@@ -18,12 +19,14 @@ void MainMenuScene::Init() {
 
     // Create start button and sky entities
     Entity* startButton = new StartButton(WM, camera);
+    Entity* startHardButton = new StartHardButton(WM, camera);
     Entity* sky = new Sky(WM, camera);
 
     // Add entities to the scene
     this->AddEntity(sky);
     this->AddEntity(ground);
     this->AddEntity(startButton);
+    this->AddEntity(startHardButton);
 
     // Start the scene and set initial game state
     this->Start();

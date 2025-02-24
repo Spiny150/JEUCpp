@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/Headers/inc/Game/Elements/Player",
-                "${workspaceFolder}/Headers/inc/Engine/Entity/Components/Visual"
+                "${workspaceFolder}/Headers/inc/Engine/Entity/Components/Visual",
+                "${workspaceFolder}/Headers/inc/Engine/Entity",
+                "${workspaceFolder}/Headers/inc/Engine/Entity/Components"
             ],
             "defines": [],
             "compilerPath": "C:/mingw64/bin/gcc.exe",
