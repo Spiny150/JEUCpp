@@ -1,15 +1,12 @@
 # Variables
 CXX = g++
-# Ajoute tous les sous-dossiers de src/include comme chemins d'includes
-CXXFLAGS = -Wall -Wextra -std=c++20 $(shell find Headers/inc -type d | sed "s/^/-I/") $(shell find src/include -type d | sed "s/^/-I/") -I"src/include"
-# Utilise les fichiers d'importation présents dans src/lib pour l'édition de liens
-LDFLAGS = -L"src/lib" -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lm
+CXXFLAGS = -Wall -Wextra -std=c++20 $(shell find Headers/inc -type d | sed 's/^/-I/') `sdl2-config --cflags` `pkg-config --cflags SDL2_image` `pkg-config --libs SDL2_ttf`
+LDFLAGS = `sdl2-config --libs` `pkg-config --libs SDL2_image` `pkg-config --libs SDL2_ttf` -lm
+SRC = main.cpp $(shell find Sources/src -name '*.cpp') # Trouve tous les fichiers .cpp de manière récursive
+OBJ = $(SRC:.cpp=.o) # Convertit les fichiers .cpp en fichiers .o
+TARGET = exe
 
-# Recherche récursive des fichiers .cpp dans Sources/src et main.cpp
-SRC = main.cpp $(shell find Sources/src -name "*.cpp")
-OBJ = $(SRC:.cpp=.o)
-TARGET = DuckDuckGame.exe
-
+# Règles
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
@@ -19,8 +16,7 @@ $(TARGET): $(OBJ)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	del /Q $(OBJ) $(TARGET)
+	rm -f $(OBJ) $(TARGET)
 
-.PHONY: all clean
-
-#Merci à Ismael pour l'aide à la compilation sur Windows <3
+# Pour éviter les conflits avec des fichiers nommés "clean"
+.PHONY: clean all

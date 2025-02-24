@@ -13,20 +13,25 @@
 #include <memory>
 #include "score_manager.hpp"
 
-// Main entry point of the application
+// Main entry point of the application, parameters are necessary for SDL compilation on Windows
 int main(int argv, char **args)
 {
     // Initialize random seed
     srand(time(NULL));
 
-    // Initialize window and event handler
+    // Initialize window, scene and score manager with null pointers
     WindowManager *WM = nullptr;
+    SceneManager *sceneManager = nullptr;
+    ScoreManager *scoreManager = nullptr;
+    // Initialize SDL_Event;
     SDL_Event event;
-
-    try
-    {
+    try {
         // Create game window with specified size and title
         WM = new WindowManager(Vector2Int(800, 600), "DuckDuckGame");
+        // Create SceneManager
+        sceneManager = SceneManager::CreateInstance(WM);
+        // Create ScoreManager
+        scoreManager = ScoreManager::CreateInstance();
     }
     catch (const std::exception &e)
     {
@@ -34,10 +39,6 @@ int main(int argv, char **args)
         std::cerr << e.what() << '\n';
         return 1;
     }
-
-    // Create scene manager instance
-    SceneManager *sceneManager = SceneManager::CreateInstance(WM);
-    ScoreManager *scoreManager = ScoreManager::CreateInstance();
 
     scoreManager->loadScores("scores.data");
 
@@ -73,10 +74,11 @@ int main(int argv, char **args)
 
         // Update current scene
         sceneManager->Update();
-        // std::cout << "Game Score : " << scoreManager->getBestScore(SceneTag::Game) << std::endl;
     }
 
     // Clean up resources
+    delete scoreManager;
+    scoreManager = nullptr;
     delete sceneManager;
     sceneManager = nullptr;
     delete WM;
