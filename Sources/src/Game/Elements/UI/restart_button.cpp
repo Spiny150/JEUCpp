@@ -12,5 +12,5 @@ RestartButton::RestartButton(WindowManager* WM, Camera* camera) :
 
 void RestartButton::OnClick() {
     SceneManager* sceneManager = SceneManager::GetInstance();
-    sceneManager->SwitchToScene(SceneTag::Game);
+    sceneManager->SwitchToScene(this->scene->GetTag());
 }
